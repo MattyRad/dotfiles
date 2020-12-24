@@ -8,11 +8,11 @@ call plug#begin('~/.vim/plugged')
     Plug 'mhinz/vim-startify'                             " a better starpage
     Plug 'vim-airline/vim-airline'                        " fancy line
     Plug 'vim-airline/vim-airline-themes'                 " airline themes
-    "Plug 'itchyny/lightline.vim'
     Plug 'airblade/vim-gitgutter'                         " git gutter
     Plug 'luochen1990/rainbow'                            " Highlight matching parents different colors
     Plug 'airblade/vim-rooter'                            " Set project root to current file
     Plug 'joshdick/onedark.vim'                           " color theme
+    Plug 'sheerun/vim-polyglot'                           " language packs
 call plug#end()
 
 " vundle
@@ -26,11 +26,9 @@ call plug#end()
 "Plug 'vim-syntastic/syntastic'
 "Plug 'Raimondi/delimitMate'
 "Plug 'majutsushi/tagbar'
-"Plug 'junegunn/seoul256.vim'
 "Plug 'ervandew/supertab'
 "Plug 'tpope/vim-sleuth'
 "Plug 'ryanoasis/vim-devicons'
-"Plug 'thiagoalessio/rainbow_levels.vim'
 "Plug 'unblevable/quick-scope'
 "Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Plug 'lambdalisue/vim-rplugin' " required from lista I guess
@@ -47,6 +45,10 @@ call plug#end()
 let g:VM_default_mappings = 0
 let g:VM_maps = {}
 let g:VM_maps['Find Under']         = '<C-d>'           " replace C-n
+let g:VM_maps['Find Subword Under'] = '<C-d>'           " replace visual C-n
+
+let g:VM_mouse_mappings = 1               " some text
+let g:VM_highlight_matches = 'underline'   " some text
 """""""""""""""""""""""
 """ END VIM-VISUAL-MULTI
 """""""""""""""""""""""
@@ -61,8 +63,9 @@ let g:VM_maps['Find Under']         = '<C-d>'           " replace C-n
 """ START SEMANTIC-HIGHLIGHTING
 """""""""""""""""""""""
 "let s:semanticGUIColors = [ '#72d572', '#c5e1a5', '#e6ee9c', '#fff59d', '#ffe082', '#ffcc80', '#ffab91', '#bcaaa4', '#b0bec5', '#ffa726', '#ff8a65', '#f9bdbb', '#f9bdbb', '#f8bbd0', '#e1bee7', '#d1c4e9', '#ffe0b2', '#c5cae9', '#d0d9ff', '#b3e5fc', '#b2ebf2', '#b2dfdb', '#a3e9a4', '#dcedc8' , '#f0f4c3', '#ffb74d' ]
+"let g:semanticTermColors = [28,1,2,3,4,5,6,7,25,9,10,34,12,13,14,15,16,125,124,19]
 
-"autocmd FileType php setlocal iskeyword+=$
+autocmd FileType php setlocal iskeyword+=$
 """""""""""""""""""""""
 """ END SEMANTIC-HIGHLIGHTING
 """""""""""""""""""""""
@@ -88,6 +91,7 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline_section_x = ''
 let g:airline_section_y = ''
 let g:airline_theme='bubblegum'
+"let g:airline_theme='onedark'
 
 " Rainbow parenthesis
 let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
@@ -106,10 +110,23 @@ let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowTo
 
 " One dark theme
 let g:onedark_terminal_italics = 1
+" onedark.vim override: Don't set a background color when running in a terminal;
+" just use the terminal's background color
+" `gui` is the hex color code used in GUI mode/nvim true-color mode
+" `cterm` is the color code used in 256-color mode
+" `cterm16` is the color code used in 16-color mode
+if (has("autocmd") && !has("gui_running"))
+  augroup colorset
+    autocmd!
+    let s:white = { "gui": "#ABB2BF", "cterm": "145", "cterm16" : "7" }
+    autocmd ColorScheme * call onedark#set_highlight("Normal", { "fg": s:white }) " `bg` will not be styled since there is no `bg` setting
+  augroup END
+endif
 
 syntax on                               " Syntax highlighting
 colorscheme onedark                     " chosen theme
-set mouse-=a                            " Mouse off
+"set mouse-=a                            " Mouse off
+set mouse=a
 set directory^=$HOME/.vim/tmp//         " swp file location
 
 " Mappings
@@ -187,4 +204,5 @@ endfunction
 "Plug 'vim-scripts/SearchComplete'
 "Plug 'justinmk/vim-sneak'
 "Plug 'mhinz/vim-signify'                              " git guttter, alternate
-
+"Plug 'junegunn/seoul256.vim'
+"Plug 'thiagoalessio/rainbow_levels.vim'
