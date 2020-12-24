@@ -53,6 +53,17 @@ let g:VM_highlight_matches = 'underline'   " some text
 """ END VIM-VISUAL-MULTI
 """""""""""""""""""""""
 
+" nvim
+" mkdir -p ~/.config/nvim; ln -s ~/.vimrc ~/.config/nvim/init.vim
+set guicursor=                                          " somehow nvim changes beam cursors to block cursors
+
+" copy/paste - https://unix.stackexchange.com/questions/12535/how-to-copy-text-from-vim-to-an-external-program
+"set clipboard=unnamedplus
+"nnoremap y "*y
+"vnoremap y "*y
+"nnoremap <C-p> "*gP
+"vnoremap <C-p> "*gP
+
 " lightline.vim
 "set laststatus=2
 "let g:lightline = {
