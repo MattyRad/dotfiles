@@ -17,12 +17,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'ervandew/supertab'                              " tag completion
     Plug 'Raimondi/delimitMate'                           " matching delimiters
     Plug 'ryanoasis/vim-devicons'                         " icons in buffers etc
+    Plug 'lambdalisue/lista.nvim'                         " line filtering per file
 call plug#end()
-
-" vundle
-"set nocompatible              " be iMproved, required
-"filetype off
-
 
 " Pending review
 "Plug 'scrooloose/nerdtree'
@@ -31,8 +27,6 @@ call plug#end()
 "Plug 'tpope/vim-sleuth'
 "Plug 'unblevable/quick-scope'
 "Plug 'neoclide/coc.nvim', {'branch': 'release'}
-"Plug 'lambdalisue/vim-rplugin' " required from lista I guess
-"Plug 'lambdalisue/lista.nvim'
 "Plug 'jeetsukumaran/vim-buffergator'
 "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 "Plug 'junegunn/fzf.vim'
@@ -53,7 +47,7 @@ let g:VM_highlight_matches = 'underline'   " some text
 
 " nvim
 " mkdir -p ~/.config/nvim; ln -s ~/.vimrc ~/.config/nvim/init.vim
-set guicursor=                                          " somehow nvim changes beam cursors to block cursors
+set guicursor=                                          " somehow nvim changes beam cursors to block cursors https://github.com/neovim/neovim/issues/6005
 
 " supertab
 let g:SuperTabDefaultCompletionType = "<c-n>"
@@ -64,12 +58,6 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 "vnoremap y "*y
 "nnoremap <C-p> "*gP
 "vnoremap <C-p> "*gP
-
-" lightline.vim
-"set laststatus=2
-"let g:lightline = {
-"  \ 'colorscheme': 'onedark',
-"  \ }
 
 """""""""""""""""""""""
 """ START SEMANTIC-HIGHLIGHTING
@@ -118,6 +106,12 @@ let g:airline_theme='bubblegum'
 " Rainbow parenthesis
 let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
 
+" Lista
+let g:lista#custom_mappings = [
+      \ ['<up>', '<lista:select_previous_candidate>', 'noremap'],
+      \ ['<down>', '<lista:select_next_candidate>', 'noremap'],
+      \]
+
 " CoC
 " https://github.com/neoclide/coc.nvim
 "set cmdheight=2
@@ -153,11 +147,15 @@ set directory^=$HOME/.vim/tmp//         " swp file location
 
 " Mappings
 nnoremap r caw
-nnoremap <C-f> /
+nnoremap <C-f> :Lista<cr>
 vnoremap r <esc>caw
 nnoremap <A-up> :MRU<cr>
 nnoremap <C-w> :call CloseBufferOrQuit()<cr>
 nnoremap <C-x> dd
+inoremap rr <esc>caw
+" Buffers
+nnoremap <A-left> :bp<cr>
+nnoremap <A-right> :bn<cr>
 
 " Tabbing
 set smarttab
@@ -178,6 +176,10 @@ set synmaxcol=200                      " https://www.reddit.com/r/vim/comments/8
 set lazyredraw                         " https://www.reddit.com/r/vim/comments/8m0632/what_performance_related_things_do_you_have_in/
 
 set ve+=onemore                        " where have you been all my life https://superuser.com/questions/918500/how-to-set-cursor-to-after-last-character-in-vim
+nnoremap <end> $li
+nnoremap <home> 0i
+
+autocmd BufWritePre * %s/\s\+$//e       " trim trailing whitespace
 
 " Record last position of cursor
 function! ResCur()
@@ -232,3 +234,4 @@ endfunction
 "Plug 'thiagoalessio/rainbow_levels.vim'
 "Plug 'jceb/vim-orgmode'
 "Plug 'tpope/vim-speeddating' " required for orgmode
+"Plug 'lambdalisue/vim-rplugin' " required from lista I guess
