@@ -156,6 +156,17 @@ inoremap rr <esc>caw
 " Buffers
 nnoremap <A-left> :bp<cr>
 nnoremap <A-right> :bn<cr>
+" grab and shift lines like sublime
+nnoremap <C-S-up> :m -2<cr>
+nnoremap <C-S-down> :m +1<cr>
+vnoremap <C-S-down> :m '>+1<CR>gv=gv
+vnoremap <C-S-up> :m '<-2<CR>gv=gv
+nnoremap <C-S-left> vb
+nnoremap <C-S-right> vw
+nnoremap <S-up> v<up>
+nnoremap <S-down> v<down>
+vnoremap <S-up> <up>
+vnoremap <S-down> <down>
 
 " Tabbing
 set smarttab
