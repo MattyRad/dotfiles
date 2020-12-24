@@ -1,4 +1,9 @@
-" curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+if empty(glob("~/.vim/autoload/plug.vim"))
+    " https://stackoverflow.com/questions/47953512/how-to-ensure-plugin-manager-is-installed
+    execute '!mkdir -p ~/.vim/autoload && wget -O ~/.vim/autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    autocmd VimEnter * PlugInstall                        " https://stackoverflow.com/questions/6821033/vim-how-to-run-a-command-immediately-when-starting-vim
+endif
+
 call plug#begin('~/.vim/plugged')
     Plug 'VundleVim/Vundle.vim'
     Plug 'tpope/vim-fugitive'
@@ -18,6 +23,9 @@ call plug#begin('~/.vim/plugged')
     Plug 'Raimondi/delimitMate'                           " matching delimiters
     Plug 'ryanoasis/vim-devicons'                         " icons in buffers etc
     Plug 'lambdalisue/lista.nvim'                         " line filtering per file
+    "if executable('node')
+    ""    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    "endif
 call plug#end()
 
 " Pending review
@@ -26,7 +34,6 @@ call plug#end()
 "Plug 'majutsushi/tagbar'
 "Plug 'tpope/vim-sleuth'
 "Plug 'unblevable/quick-scope'
-"Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Plug 'jeetsukumaran/vim-buffergator'
 "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 "Plug 'junegunn/fzf.vim'
@@ -114,6 +121,7 @@ let g:lista#custom_mappings = [
 
 " CoC
 " https://github.com/neoclide/coc.nvim
+let g:coc_disable_startup_warning = 1
 "set cmdheight=2
 "set shortmess+=c
 "set signcolumn=yes
