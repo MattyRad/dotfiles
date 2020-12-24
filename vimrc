@@ -1,44 +1,41 @@
-"""""""""""""""""""""""
-""" START VUNDLE
-"""""""""""""""""""""""
-set nocompatible              " be iMproved, required
-filetype off                  " required
+" curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+call plug#begin('~/.vim/plugged')
+    Plug 'VundleVim/Vundle.vim'
+    Plug 'tpope/vim-fugitive'
+    Plug 'jaxbot/semantic-highlight.vim'                  " highlight distinct words instead of keywords
+    Plug 'mg979/vim-visual-multi', {'branch': 'master'}   " multiple cursors like sublime
+    Plug 'yegappan/mru'                                   " most recently used files
+    Plug 'mhinz/vim-startify'                             " a better starpage
+    Plug 'vim-airline/vim-airline'                        " fancy line
+    Plug 'vim-airline/vim-airline-themes'                 " airline themes
+    "Plug 'itchyny/lightline.vim'
+    Plug 'airblade/vim-gitgutter'                         " git gutter
+    Plug 'luochen1990/rainbow'                            " Highlight matching parents different colors
+    Plug 'airblade/vim-rooter'                            " Set project root to current file
+    Plug 'joshdick/onedark.vim'                           " color theme
+call plug#end()
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'jaxbot/semantic-highlight.vim'
-Plugin 'mg979/vim-visual-multi', {'branch': 'master'}
-Plugin 'yegappan/mru'
-call vundle#end()            " required
-filetype plugin indent on    " required
-"""""""""""""""""""""""
-""" END VUNDLE
-"""""""""""""""""""""""
+" vundle
+"set nocompatible              " be iMproved, required
+"filetype off
+
 
 " Pending review
 "Plug 'scrooloose/nerdtree'
 "Plug 'Xuyuanp/nerdtree-git-plugin'
-"Plug 'vim-airline/vim-airline'
-"Plug 'vim-airline/vim-airline-themes'
 "Plug 'vim-syntastic/syntastic'
 "Plug 'Raimondi/delimitMate'
 "Plug 'majutsushi/tagbar'
-"Plug 'mhinz/vim-startify'
 "Plug 'junegunn/seoul256.vim'
 "Plug 'ervandew/supertab'
 "Plug 'tpope/vim-sleuth'
 "Plug 'ryanoasis/vim-devicons'
 "Plug 'thiagoalessio/rainbow_levels.vim'
-"Plug 'airblade/vim-rooter'
 "Plug 'unblevable/quick-scope'
 "Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Plug 'lambdalisue/vim-rplugin' " required from lista I guess
 "Plug 'lambdalisue/lista.nvim'
-"Plug 'mhinz/vim-signify'
 "Plug 'jeetsukumaran/vim-buffergator'
-"Plug 'luochen1990/rainbow'
 "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 "Plug 'junegunn/fzf.vim'
 "Plug 'jceb/vim-orgmode'
@@ -53,6 +50,12 @@ let g:VM_maps['Find Under']         = '<C-d>'           " replace C-n
 """""""""""""""""""""""
 """ END VIM-VISUAL-MULTI
 """""""""""""""""""""""
+
+" lightline.vim
+"set laststatus=2
+"let g:lightline = {
+"  \ 'colorscheme': 'onedark',
+"  \ }
 
 """""""""""""""""""""""
 """ START SEMANTIC-HIGHLIGHTING
@@ -70,6 +73,25 @@ set hidden
 set encoding=utf-8
 " end vim ctrlspace
 
+" vim-gitgutter
+"let g:gitgutter_set_sign_backgrounds = 1
+set updatetime=100                                  " improve delay to show changes
+
+" Rooter
+let g:rooter_silent_chdir = 1                       " To stop Rooter echoing the project directory
+
+" Airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = ''
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline_section_x = ''
+let g:airline_section_y = ''
+let g:airline_theme='bubblegum'
+
+" Rainbow parenthesis
+let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
+
 " CoC
 " https://github.com/neoclide/coc.nvim
 "set cmdheight=2
@@ -82,7 +104,11 @@ set encoding=utf-8
 "set number " Line numbers
 "highlight LineNr term=bold cterm=NONE ctermfg=Black ctermbg=NONE gui=NONE guifg=Black guibg=NONE
 
+" One dark theme
+let g:onedark_terminal_italics = 1
+
 syntax on                               " Syntax highlighting
+colorscheme onedark                     " chosen theme
 set mouse-=a                            " Mouse off
 set directory^=$HOME/.vim/tmp//         " swp file location
 
@@ -160,4 +186,5 @@ endfunction
 "Plug 'haya14busa/incsearch.vim'
 "Plug 'vim-scripts/SearchComplete'
 "Plug 'justinmk/vim-sneak'
+"Plug 'mhinz/vim-signify'                              " git guttter, alternate
 
