@@ -13,6 +13,10 @@ call plug#begin('~/.vim/plugged')
     Plug 'airblade/vim-rooter'                            " Set project root to current file
     Plug 'joshdick/onedark.vim'                           " color theme
     Plug 'sheerun/vim-polyglot'                           " language packs
+    Plug 'vim-syntastic/syntastic'                        " language checking tool
+    Plug 'ervandew/supertab'                              " tag completion
+    Plug 'Raimondi/delimitMate'                           " matching delimiters
+    Plug 'ryanoasis/vim-devicons'                         " icons in buffers etc
 call plug#end()
 
 " vundle
@@ -23,12 +27,8 @@ call plug#end()
 " Pending review
 "Plug 'scrooloose/nerdtree'
 "Plug 'Xuyuanp/nerdtree-git-plugin'
-"Plug 'vim-syntastic/syntastic'
-"Plug 'Raimondi/delimitMate'
 "Plug 'majutsushi/tagbar'
-"Plug 'ervandew/supertab'
 "Plug 'tpope/vim-sleuth'
-"Plug 'ryanoasis/vim-devicons'
 "Plug 'unblevable/quick-scope'
 "Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Plug 'lambdalisue/vim-rplugin' " required from lista I guess
@@ -36,8 +36,6 @@ call plug#end()
 "Plug 'jeetsukumaran/vim-buffergator'
 "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 "Plug 'junegunn/fzf.vim'
-"Plug 'jceb/vim-orgmode'
-"Plug 'tpope/vim-speeddating' " required for orgmode
 
 """""""""""""""""""""""
 """ START VIM-VISUAL-MULTI
@@ -56,6 +54,9 @@ let g:VM_highlight_matches = 'underline'   " some text
 " nvim
 " mkdir -p ~/.config/nvim; ln -s ~/.vimrc ~/.config/nvim/init.vim
 set guicursor=                                          " somehow nvim changes beam cursors to block cursors
+
+" supertab
+let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " copy/paste - https://unix.stackexchange.com/questions/12535/how-to-copy-text-from-vim-to-an-external-program
 "set clipboard=unnamedplus
@@ -89,7 +90,17 @@ set encoding=utf-8
 
 " vim-gitgutter
 "let g:gitgutter_set_sign_backgrounds = 1
-set updatetime=100                                  " improve delay to show changes
+set updatetime=20                                  " improve delay to show changes
+
+" Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 " Rooter
 let g:rooter_silent_chdir = 1                       " To stop Rooter echoing the project directory
@@ -142,9 +153,11 @@ set directory^=$HOME/.vim/tmp//         " swp file location
 
 " Mappings
 nnoremap r caw
+nnoremap <C-f> /
 vnoremap r <esc>caw
 nnoremap <A-up> :MRU<cr>
 nnoremap <C-w> :call CloseBufferOrQuit()<cr>
+nnoremap <C-x> dd
 
 " Tabbing
 set smarttab
@@ -158,12 +171,13 @@ set expandtab
 set tabstop=4
 set shiftwidth=4
 
-
 " Optimizations
 set hid                                " https://github.com/neovim/neovim/issues/4524
 let loaded_matchparen = 1              " https://www.reddit.com/r/vim/comments/8m0632/what_performance_related_things_do_you_have_in/
 set synmaxcol=200                      " https://www.reddit.com/r/vim/comments/8m0632/what_performance_related_things_do_you_have_in/
 set lazyredraw                         " https://www.reddit.com/r/vim/comments/8m0632/what_performance_related_things_do_you_have_in/
+
+set ve+=onemore                        " where have you been all my life https://superuser.com/questions/918500/how-to-set-cursor-to-after-last-character-in-vim
 
 " Record last position of cursor
 function! ResCur()
@@ -195,7 +209,6 @@ endfunction
 
 " Graveyard
 "Plug 'ctrlpvim/ctrlp.vim'
-"Plug 'airblade/vim-gitgutter'
 "Plug 'zefei/vim-colortuner'
 "Plug 'vim-ctrlspace/vim-ctrlspace'
 "Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
@@ -217,3 +230,5 @@ endfunction
 "Plug 'mhinz/vim-signify'                              " git guttter, alternate
 "Plug 'junegunn/seoul256.vim'
 "Plug 'thiagoalessio/rainbow_levels.vim'
+"Plug 'jceb/vim-orgmode'
+"Plug 'tpope/vim-speeddating' " required for orgmode
