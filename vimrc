@@ -29,6 +29,36 @@ call plug#begin('~/.vim/plugged')
 call plug#end()
 
 " Pending review
+" https://github.com/lunixbochs/ActualVim
+" https://github.com/vim-ctrlspace/vim-ctrlspace
+" https://github.com/liuchengxu/vim-clap
+" https://github.com/editor-bootstrap/vim-bootstrap
+" https://github.com/vim-awesome/vim-awesome
+" https://github.com/Raimondi/delimitMate
+" https://github.com/prabirshrestha/vim-lsp
+" https://github.com/Shougo/denite.nvim
+" https://github.com/justinmk/vim-sneak
+" https://github.com/mhinz/vim-signify
+" https://github.com/godlygeek/tabular
+" https://github.com/tpope/vim-unimpaired
+" https://github.com/wincent/command-t
+" https://github.com/ervandew/supertab
+" https://github.com/jiangmiao/auto-pairs
+" https://github.com/autozimu/LanguageClient-neovim
+" https://github.com/Yggdroot/indentLine
+" https://github.com/junegunn/vim-easy-align
+" https://github.com/tpope/vim-sensible
+" https://github.com/davidhalter/jedi-vim
+" https://github.com/Shougo/deoplete.nvim
+" https://github.com/vimwiki/vimwiki
+" https://github.com/square/maximum-awesome
+" https://github.com/easymotion/vim-easymotion
+" https://github.com/yangyangwithgnu/use_vim_as_ide
+" https://github.com/jarun/nnn
+" https://github.com/dense-analysis/ale
+" https://github.com/mhinz/vim-galore
+" https://github.com/spf13/spf13-vim
+" https://github.com/amix/vimrc
 "Plug 'scrooloose/nerdtree'
 "Plug 'Xuyuanp/nerdtree-git-plugin'
 "Plug 'majutsushi/tagbar'
@@ -161,6 +191,9 @@ nnoremap <A-up> :MRU<cr>
 nnoremap <C-w> :call CloseBufferOrQuit()<cr>
 nnoremap <C-x> dd
 inoremap rr <esc>caw
+" phone help
+nnoremap hh ^ii
+nnoremap ll A
 " Buffers
 nnoremap <A-left> :bp<cr>
 nnoremap <A-right> :bn<cr>
