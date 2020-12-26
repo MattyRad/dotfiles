@@ -155,7 +155,6 @@ let g:coc_disable_startup_warning = 1
 "set cmdheight=2
 "set shortmess+=c
 "set signcolumn=yes
-"set guicursor=
 "set shell=/bin/sh
 
 " Line numbers
@@ -163,13 +162,20 @@ let g:coc_disable_startup_warning = 1
 "highlight LineNr term=bold cterm=NONE ctermfg=Black ctermbg=NONE gui=NONE guifg=Black guibg=NONE
 
 " One dark theme
+" https://stackoverflow.com/questions/5698284/in-my-vimrc-how-can-i-check-for-the-existence-of-a-color-scheme
+" {rtp}/autoload/has.vim
+function! HasColorScheme(name) abort
+    let pat = 'colors/'.a:name.'.vim'
+    return !empty(globpath(&rtp, pat))
+endfunction
+
 let g:onedark_terminal_italics = 1
 " onedark.vim override: Don't set a background color when running in a terminal;
 " just use the terminal's background color
 " `gui` is the hex color code used in GUI mode/nvim true-color mode
 " `cterm` is the color code used in 256-color mode
 " `cterm16` is the color code used in 16-color mode
-if (has("autocmd") && !has("gui_running"))
+if (has("autocmd") && !has("gui_running") && HasColorScheme('onedark'))
   augroup colorset
     autocmd!
     let s:white = { "gui": "#ABB2BF", "cterm": "145", "cterm16" : "7" }
@@ -178,7 +184,11 @@ if (has("autocmd") && !has("gui_running"))
 endif
 
 syntax on                               " Syntax highlighting
-colorscheme onedark                     " chosen theme
+
+if HasColorScheme('onedark')
+    colorscheme onedark                     " chosen theme
+endif
+
 "set mouse-=a                            " Mouse off
 set mouse=a
 set directory^=$HOME/.vim/tmp//         " swp file location
