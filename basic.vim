@@ -582,16 +582,11 @@ vnoremap <S-up> <up>
 vnoremap <S-down> <down>
 
 " Tabbing
-set smarttab
 set smartindent
 set cindent
 set autoindent
 set softtabstop=4
-set backspace=indent,eol,start
 set copyindent
-set expandtab
-set tabstop=4
-set shiftwidth=4
 
 " Optimizations
 set hid                                " https://github.com/neovim/neovim/issues/4524
