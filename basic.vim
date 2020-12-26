@@ -43,7 +43,7 @@ set ruler
 set cmdheight=1
 
 " A buffer becomes hidden when it is abandoned
-set hid
+set hid                                " https://github.com/neovim/neovim/issues/4524
 
 " Configure backspace so it acts as it should act
 set backspace=eol,start,indent
@@ -62,7 +62,7 @@ set hlsearch
 set incsearch
 
 " Don't redraw while executing macros (good performance config)
-set lazyredraw
+set lazyredraw                         " https://www.reddit.com/r/vim/comments/8m0632/what_performance_related_things_do_you_have_in/
 
 " For regular expressions turn magic on
 set magic
@@ -227,17 +227,17 @@ vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
 vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 
 " Delete trailing white space on save, useful for some filetypes ;)
-fun! CleanExtraSpaces()
-    let save_cursor = getpos(".")
-    let old_query = getreg('/')
-    silent! %s/\s\+$//e
-    call setpos('.', save_cursor)
-    call setreg('/', old_query)
-endfun
+"fun! CleanExtraSpaces()
+"    let save_cursor = getpos(".")
+"    let old_query = getreg('/')
+"    silent! %s/\s\+$//e
+"    call setpos('.', save_cursor)
+"    call setreg('/', old_query)
+"endfun
 
-if has("autocmd")
-    autocmd BufWritePre *.txt,*.js,*.py,*.wiki,*.sh,*.coffee :call CleanExtraSpaces()
-endif
+"if has("autocmd")
+"    autocmd BufWritePre *.txt,*.js,*.py,*.wiki,*.sh,*.coffee :call CleanExtraSpaces()
+"endif
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -386,6 +386,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'Raimondi/delimitMate'                           " matching delimiters
     Plug 'ryanoasis/vim-devicons'                         " icons in buffers etc
     Plug 'lambdalisue/lista.nvim'                         " line filtering per file
+    Plug 'scrooloose/nerdtree'
     "if executable('node')
     ""    Plug 'neoclide/coc.nvim', {'branch': 'release'}
     "endif
@@ -421,7 +422,6 @@ call plug#end()
 " https://github.com/dense-analysis/ale
 " https://github.com/mhinz/vim-galore
 " https://github.com/spf13/spf13-vim
-"Plug 'scrooloose/nerdtree'
 "Plug 'Xuyuanp/nerdtree-git-plugin'
 "Plug 'majutsushi/tagbar'
 "Plug 'tpope/vim-sleuth'
@@ -437,6 +437,8 @@ let g:VM_default_mappings = 0
 let g:VM_maps = {}
 let g:VM_maps['Find Under']         = '<C-d>'           " replace C-n
 let g:VM_maps['Find Subword Under'] = '<C-d>'           " replace visual C-n
+let g:VM_maps['Add Cursor Down']    = '<S-A-down>'
+let g:VM_maps['Add Cursor Up']      = '<S-A-up>'
 
 let g:VM_mouse_mappings = 1               " some text
 let g:VM_highlight_matches = 'underline'   " some text
@@ -458,6 +460,15 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 "nnoremap <C-p> "*gP
 "vnoremap <C-p> "*gP
 
+" nerdtree
+" Start NERDTree
+" autoopen
+autocmd VimEnter * NERDTree
+" Go to previous (last accessed) window.
+autocmd VimEnter * wincmd p
+" autoclose if it's the last thing open
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
 """""""""""""""""""""""
 """ START SEMANTIC-HIGHLIGHTING
 """""""""""""""""""""""
@@ -472,12 +483,13 @@ autocmd FileType php setlocal iskeyword+=$
 " https://github.com/vim-ctrlspace/vim-ctrlspace
 set nocompatible
 set hidden
-set encoding=utf-8
 " end vim ctrlspace
 
 " vim-gitgutter
 "let g:gitgutter_set_sign_backgrounds = 1
 set updatetime=20                                  " improve delay to show changes
+
+autocmd BufWritePre * %s/\s\+$//e       " trim trailing whitespace
 
 " Syntastic
 set statusline+=%#warningmsg#
@@ -525,7 +537,6 @@ let g:coc_disable_startup_warning = 1
 
 " One dark theme
 " https://stackoverflow.com/questions/5698284/in-my-vimrc-how-can-i-check-for-the-existence-of-a-color-scheme
-" {rtp}/autoload/has.vim
 function! HasColorScheme(name) abort
     let pat = 'colors/'.a:name.'.vim'
     return !empty(globpath(&rtp, pat))
@@ -545,15 +556,14 @@ if (has("autocmd") && !has("gui_running") && HasColorScheme('onedark'))
   augroup END
 endif
 
-syntax on                               " Syntax highlighting
-
 if HasColorScheme('onedark')
-    colorscheme onedark                     " chosen theme
+    colorscheme onedark
+elseif
+    colorscheme peachpuff
 endif
 
 "set mouse-=a                            " Mouse off
 set mouse=a
-set directory^=$HOME/.vim/tmp//         " swp file location
 
 " Mappings
 nnoremap r caw
@@ -580,6 +590,12 @@ nnoremap <S-up> v<up>
 nnoremap <S-down> v<down>
 vnoremap <S-up> <up>
 vnoremap <S-down> <down>
+nnoremap <C-c> yy
+nnoremap <C-v> p
+nnoremap <C-x> dd
+"nnoremap <C-down> o
+"nnoremap <C-up> O
+"nnoremap <S-A-down> <C-down>
 
 " Tabbing
 set smartindent
@@ -589,16 +605,12 @@ set softtabstop=4
 set copyindent
 
 " Optimizations
-set hid                                " https://github.com/neovim/neovim/issues/4524
 let loaded_matchparen = 1              " https://www.reddit.com/r/vim/comments/8m0632/what_performance_related_things_do_you_have_in/
 set synmaxcol=200                      " https://www.reddit.com/r/vim/comments/8m0632/what_performance_related_things_do_you_have_in/
-set lazyredraw                         " https://www.reddit.com/r/vim/comments/8m0632/what_performance_related_things_do_you_have_in/
 
 set ve+=onemore                        " where have you been all my life https://superuser.com/questions/918500/how-to-set-cursor-to-after-last-character-in-vim
 nnoremap <end> $li
 nnoremap <home> 0i
-
-autocmd BufWritePre * %s/\s\+$//e       " trim trailing whitespace
 
 " Record last position of cursor
 function! ResCur()
