@@ -76,12 +76,6 @@ set novisualbell
 set t_vb=
 set tm=500
 
-" Properly disable sound on errors on MacVim
-if has("gui_macvim")
-    autocmd GUIEnter * set vb t_vb=
-endif
-
-
 " Add a bit extra margin to the left
 set foldcolumn=1
 
@@ -96,11 +90,6 @@ syntax enable
 if $COLORTERM == 'gnome-terminal'
     set t_Co=256
 endif
-
-try
-    colorscheme desert
-catch
-endtry
 
 set background=dark
 
@@ -163,38 +152,38 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 " => Moving around, tabs, windows and buffers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
-map <space> /
-map <C-space> ?
+"map <space> /
+"map <C-space> ?
 
 " Disable highlight when <leader><cr> is pressed
-map <silent> <leader><cr> :noh<cr>
+"map <silent> <leader><cr> :noh<cr>
 
 " Smart way to move between windows
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
+"map <C-j> <C-W>j
+"map <C-k> <C-W>k
+"map <C-h> <C-W>h
+"map <C-l> <C-W>l
 
 " Close the current buffer
-map <leader>bd :Bclose<cr>:tabclose<cr>gT
+"map <leader>bd :Bclose<cr>:tabclose<cr>gT
 
 " Close all the buffers
-map <leader>ba :bufdo bd<cr>
+"map <leader>ba :bufdo bd<cr>
 
-map <leader>l :bnext<cr>
-map <leader>h :bprevious<cr>
+"map <leader>l :bnext<cr>
+"map <leader>h :bprevious<cr>
 
 " Useful mappings for managing tabs
-map <leader>tn :tabnew<cr>
-map <leader>to :tabonly<cr>
-map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove
-map <leader>t<leader> :tabnext
+"map <leader>tn :tabnew<cr>
+"map <leader>to :tabonly<cr>
+"map <leader>tc :tabclose<cr>
+"map <leader>tm :tabmove
+"map <leader>t<leader> :tabnext
 
 " Let 'tl' toggle between this and the last accessed tab
-let g:lasttab = 1
-nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
-au TabLeave * let g:lasttab = tabpagenr()
+"let g:lasttab = 1
+"nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
+"au TabLeave * let g:lasttab = tabpagenr()
 
 
 " Opens a new tab with the current buffer's path
@@ -202,7 +191,7 @@ au TabLeave * let g:lasttab = tabpagenr()
 map <leader>te :tabedit <C-r>=expand("%:p:h")<cr>/
 
 " Switch CWD to the directory of the open buffer
-map <leader>cd :cd %:p:h<cr>:pwd<cr>
+"map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 " Specify the behavior when switching between buffers
 try
@@ -229,20 +218,13 @@ set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ 
 " => Editing mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remap VIM 0 to first non-blank character
-map 0 ^
+"map 0 ^
 
 " Move a line of text using ALT+[jk] or Command+[jk] on mac
 nmap <M-j> mz:m+<cr>`z
 nmap <M-k> mz:m-2<cr>`z
 vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
 vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
-
-if has("mac") || has("macunix")
-  nmap <D-j> <M-j>
-  nmap <D-k> <M-k>
-  vmap <D-j> <M-j>
-  vmap <D-k> <M-k>
-endif
 
 " Delete trailing white space on save, useful for some filetypes ;)
 fun! CleanExtraSpaces()
@@ -256,19 +238,6 @@ endfun
 if has("autocmd")
     autocmd BufWritePre *.txt,*.js,*.py,*.wiki,*.sh,*.coffee :call CleanExtraSpaces()
 endif
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Spell checking
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Pressing ,ss will toggle and untoggle spell checking
-map <leader>ss :setlocal spell!<cr>
-
-" Shortcuts using <leader>
-map <leader>sn ]s
-map <leader>sp [s
-map <leader>sa zg
-map <leader>s? z=
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -288,65 +257,6 @@ map <leader>pp :setlocal paste!<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Helper functions
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Returns true if paste mode is enabled
-function! HasPaste()
-    if &paste
-        return 'PASTE MODE  '
-    endif
-    return ''
-endfunction
-
-" Don't close window, when deleting a buffer
-command! Bclose call <SID>BufcloseCloseIt()
-function! <SID>BufcloseCloseIt()
-    let l:currentBufNum = bufnr("%")
-    let l:alternateBufNum = bufnr("#")
-
-    if buflisted(l:alternateBufNum)
-        buffer #
-    else
-        bnext
-    endif
-
-    if bufnr("%") == l:currentBufNum
-        new
-    endif
-
-    if buflisted(l:currentBufNum)
-        execute("bdelete! ".l:currentBufNum)
-    endif
-endfunction
-
-function! CmdLine(str)
-    call feedkeys(":" . a:str)
-endfunction
-
-function! VisualSelection(direction, extra_filter) range
-    let l:saved_reg = @"
-    execute "normal! vgvy"
-
-    let l:pattern = escape(@", "\\/.*'$^~[]")
-    let l:pattern = substitute(l:pattern, "\n$", "", "")
-
-    if a:direction == 'gv'
-        call CmdLine("Ack '" . l:pattern . "' " )
-    elseif a:direction == 'replace'
-        call CmdLine("%s" . '/'. l:pattern . '/')
-    endif
-
-    let @/ = l:pattern
-    let @" = l:saved_reg
-endfunction
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Important:
-"       This requries that you install https://github.com/amix/vimrc !
-"
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => GUI related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Set font according to system
@@ -362,23 +272,6 @@ elseif has("unix")
     set gfn=Monospace\ 11
 endif
 
-" Disable scrollbars (real hackers don't use scrollbars for navigation!)
-set guioptions-=r
-set guioptions-=R
-set guioptions-=l
-set guioptions-=L
-
-" Colorscheme
-set background=dark
-colorscheme peaksea
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Fast editing and reloading of vimrc configs
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <leader>e :e! ~/.vim_runtime/my_configs.vim<cr>
-autocmd! bufwritepost ~/.vim_runtime/my_configs.vim source ~/.vim_runtime/my_configs.vim
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Turn persistent undo on
@@ -389,33 +282,6 @@ try
     set undofile
 catch
 endtry
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Command mode related
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Smart mappings on the command line
-cno $h e ~/
-cno $d e ~/Desktop/
-cno $j e ./
-cno $c e <C-\>eCurrentFileDir("e")<cr>
-
-" $q is super useful when browsing on the command line
-" it deletes everything until the last slash
-cno $q <C-\>eDeleteTillSlash()<cr>
-
-" Bash like keys for the command line
-cnoremap <C-A>		<Home>
-cnoremap <C-E>		<End>
-cnoremap <C-K>		<C-U>
-
-cnoremap <C-P> <Up>
-cnoremap <C-N> <Down>
-
-" Map ½ to something useful
-map ½ $
-cmap ½ $
-imap ½ $
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -435,18 +301,6 @@ inoremap $3 {}<esc>i
 inoremap $4 {<esc>o}<esc>O
 inoremap $q ''<esc>i
 inoremap $e ""<esc>i
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => General abbreviations
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-iab xdate <C-r>=strftime("%d/%m/%y %H:%M:%S")<cr>
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Omni complete functions
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -486,30 +340,3 @@ map <leader>p :cp<cr>
 " Make sure that enter is never overriden in the quickfix window
 autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Helper functions
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-func! DeleteTillSlash()
-    let g:cmd = getcmdline()
-
-    if has("win16") || has("win32")
-        let g:cmd_edited = substitute(g:cmd, "\\(.*\[\\\\]\\).*", "\\1", "")
-    else
-        let g:cmd_edited = substitute(g:cmd, "\\(.*\[/\]\\).*", "\\1", "")
-    endif
-
-    if g:cmd == g:cmd_edited
-        if has("win16") || has("win32")
-            let g:cmd_edited = substitute(g:cmd, "\\(.*\[\\\\\]\\).*\[\\\\\]", "\\1", "")
-        else
-            let g:cmd_edited = substitute(g:cmd, "\\(.*\[/\]\\).*/", "\\1", "")
-        endif
-    endif
-
-    return g:cmd_edited
-endfunc
-
-func! CurrentFileDir(cmd)
-    return a:cmd . " " . expand("%:p:h") . "/"
-endfunc
