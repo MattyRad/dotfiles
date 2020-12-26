@@ -597,6 +597,14 @@ nnoremap <C-x> dd
 nnoremap <C-down> o
 nnoremap <C-up> O
 
+nnoremap <S-home> v<S-home>
+nnoremap <S-end> v<S-end><left>
+
+vnoremap <C-x> di
+vnoremap <C-p> <esc>p
+
+inoremap <C-v> <esc>pi
+
 " Tabbing
 set smartindent
 set cindent
@@ -605,8 +613,9 @@ set softtabstop=4
 set copyindent
 
 " Optimizations
-let loaded_matchparen = 1              " https://www.reddit.com/r/vim/comments/8m0632/what_performance_related_things_do_you_have_in/
-set synmaxcol=200                      " https://www.reddit.com/r/vim/comments/8m0632/what_performance_related_things_do_you_have_in/
+" https://www.reddit.com/r/vim/comments/7m0632/what_performance_related_things_do_you_have_in/
+let loaded_matchparen = 1
+set synmaxcol=200
 
 set ve+=onemore                        " where have you been all my life https://superuser.com/questions/918500/how-to-set-cursor-to-after-last-character-in-vim
 nnoremap <end> $li
