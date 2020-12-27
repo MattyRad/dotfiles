@@ -382,7 +382,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'airblade/vim-rooter'                            " Set project root to current file
     Plug 'joshdick/onedark.vim'                           " color theme
     Plug 'sheerun/vim-polyglot'                           " language packs
-    Plug 'vim-syntastic/syntastic'                        " language checking tool
     Plug 'ervandew/supertab'                              " tag completion
     Plug 'Raimondi/delimitMate'                           " matching delimiters
     Plug 'ryanoasis/vim-devicons'                         " icons in buffers etc
@@ -391,10 +390,21 @@ call plug#begin('~/.vim/plugged')
     "if executable('node')
     ""    Plug 'neoclide/coc.nvim', {'branch': 'release'}
     "endif
+    Plug 'psliwka/vim-smoothie'
+    Plug 'ojroques/vim-scrollstatus'
 call plug#end()
 
 " Pending review
+"Plug 'Xuyuanp/scrollbar.nvim'                         " scrollbars
+"Plug 'obcat/vim-sclow'
+"if executable('cargo')
+"    Plug 'wfxr/minimap.vim', {'do': ':!cargo install --locked code-minimap'} " minimap for scrolling
+"endif
 " https://github.com/lunixbochs/ActualVim
+"Plug 'lornix/vim-scrollbar'
+"Plug 'Zarainia/vim-scrollbar'
+"Plug 'severin-lemaignan/vim-minimap'
+"Plug 'vim-syntastic/syntastic'                        " language checking tool
 " https://github.com/vim-ctrlspace/vim-ctrlspace
 " https://github.com/liuchengxu/vim-clap
 " https://github.com/editor-bootstrap/vim-bootstrap
@@ -510,16 +520,13 @@ set updatetime=20                                  " improve delay to show chang
 autocmd BufWritePre * %s/\s\+$//e       " trim trailing whitespace
 
 " Syntastic
-if exists("*SyntasticStatuslineFlag")
-    set statusline+=%#warningmsg#
-    set statusline+=%{SyntasticStatuslineFlag()}
-    set statusline+=%*
-
-    let g:syntastic_always_populate_loc_list = 1
-    let g:syntastic_auto_loc_list = 1
-    let g:syntastic_check_on_open = 1
-    let g:syntastic_check_on_wq = 0
-endif
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
 
 " Rooter
 let g:rooter_silent_chdir = 1                       " To stop Rooter echoing the project directory
@@ -529,8 +536,12 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = ''
 let g:airline#extensions#tabline#formatter = 'unique_tail'
-let g:airline_section_x = ''
-let g:airline_section_y = ''
+let g:airline_section_x = '%{ScrollStatus()}'
+let g:airline_section_y = airline#section#create_right(['filetype'])
+let g:airline_section_z = airline#section#create([
+            \ '%#__accent_bold#%3l%#__restore__#/%L', ' ',
+            \ '%#__accent_bold#%3v%#__restore__#/%3{virtcol("$") - 1}',
+            \ ])
 let g:airline_theme='bubblegum'
 "let g:airline_theme='onedark'
 
@@ -612,6 +623,12 @@ nnoremap <C-x> dd
 nnoremap <C-down> o
 nnoremap <C-up> O
 
+inoremap <C-down> <esc>oi
+inoremap <C-up> <esc>Oi
+
+inoremap <C-x> <esc>ddi
+inoremap <C-v> <esc>pi
+
 nnoremap <S-home> v<S-home>
 nnoremap <S-end> v<S-end><left>
 
@@ -628,6 +645,11 @@ vnoremap <C-S-z> <esc>r
 
 inoremap <C-s> <esc>:w<cr>
 nnoremap <C-s> :w<cr>
+vnoremap <C-s> <esc>:w<cr>
+
+
+inoremap <C-q> <esc>
+vnoremap <C-q> <esc>
 
 nnoremap <C-left> b
 nnoremap <C-right> e<right>
@@ -705,3 +727,8 @@ endfunction
 "Plug 'jceb/vim-orgmode'
 "Plug 'tpope/vim-speeddating' " required for orgmode
 "Plug 'lambdalisue/vim-rplugin' " required from lista I guess
+
+" https://vi.stackexchange.com/questions/6730/how-to-get-rid-of-the-command-line-bar
+set noshowmode  " to get rid of thing like --INSERT--
+set noshowcmd  " to get rid of display of last command
+set shortmess+=F  " to get rid of the file name displayed in the command line bar
