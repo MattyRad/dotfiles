@@ -103,6 +103,11 @@ if has("gui_running")
     set guitablabel=%M\ %t
 endif
 
+" Allow color schemes to do bright colors without forcing bold.
+if &t_Co == 8 && $TERM !~# '^Eterm'
+  set t_Co=16
+endif
+
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
 
@@ -386,12 +391,10 @@ call plug#begin('~/.vim/plugged')
     Plug 'Raimondi/delimitMate'                           " matching delimiters
     Plug 'ryanoasis/vim-devicons'                         " icons in buffers etc
     Plug 'lambdalisue/lista.nvim'                         " line filtering per file
-    "Plug 'scrooloose/nerdtree'
-    "if executable('node')
-    ""    Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    "endif
-    Plug 'psliwka/vim-smoothie'
-    Plug 'ojroques/vim-scrollstatus'
+    Plug 'psliwka/vim-smoothie'                           " smooth scrolling in page-up/down
+    Plug 'ojroques/vim-scrollstatus'                      " add scrollbar to statusline (vim-airline)
+    " harmless plugins: plugins I don't actively use but aren't intrusive and could be useful later
+    Plug 'easymotion/vim-easymotion'
 call plug#end()
 
 " Pending review
@@ -401,10 +404,12 @@ call plug#end()
 "    Plug 'wfxr/minimap.vim', {'do': ':!cargo install --locked code-minimap'} " minimap for scrolling
 "endif
 " https://github.com/lunixbochs/ActualVim
-"Plug 'lornix/vim-scrollbar'
-"Plug 'Zarainia/vim-scrollbar'
 "Plug 'severin-lemaignan/vim-minimap'
 "Plug 'vim-syntastic/syntastic'                        " language checking tool
+"Plug 'scrooloose/nerdtree'
+"if executable('node')
+""    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"endif
 " https://github.com/vim-ctrlspace/vim-ctrlspace
 " https://github.com/liuchengxu/vim-clap
 " https://github.com/editor-bootstrap/vim-bootstrap
@@ -420,19 +425,13 @@ call plug#end()
 " https://github.com/ervandew/supertab
 " https://github.com/jiangmiao/auto-pairs
 " https://github.com/autozimu/LanguageClient-neovim
-" https://github.com/Yggdroot/indentLine
 " https://github.com/junegunn/vim-easy-align
 " https://github.com/tpope/vim-sensible
-" https://github.com/davidhalter/jedi-vim
 " https://github.com/Shougo/deoplete.nvim
-" https://github.com/vimwiki/vimwiki
-" https://github.com/square/maximum-awesome
-" https://github.com/easymotion/vim-easymotion
 " https://github.com/yangyangwithgnu/use_vim_as_ide
 " https://github.com/jarun/nnn
 " https://github.com/dense-analysis/ale
 " https://github.com/mhinz/vim-galore
-" https://github.com/spf13/spf13-vim
 "Plug 'Xuyuanp/nerdtree-git-plugin'
 "Plug 'majutsushi/tagbar'
 "Plug 'tpope/vim-sleuth'
@@ -440,6 +439,43 @@ call plug#end()
 "Plug 'jeetsukumaran/vim-buffergator'
 "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 "Plug 'junegunn/fzf.vim'
+
+" Old Graveyard
+"Plug 'ctrlpvim/ctrlp.vim'
+"Plug 'zefei/vim-colortuner'
+"Plug 'vim-ctrlspace/vim-ctrlspace'
+"Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
+"Plug 'wincent/command-t'
+"Plug 'lifepillar/vim-mucomplete'
+"Plug 'terryma/vim-multiple-cursors'
+"Plug 'tpope/vim-surround'
+"Plug 'jiangmiao/auto-pairs'
+"Plug 'StanAngeloff/php.vim'
+"Plug 'flazz/vim-colorschemes'
+"Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
+"Plug 'yuttie/comfortable-motion.vim'
+"Plug 'amiorin/vim-project'
+"Plug 'terryma/vim-expand-region'
+"Plug 'easymotion/vim-easymotion'
+"Plug 'haya14busa/incsearch.vim'
+"Plug 'vim-scripts/SearchComplete'
+"Plug 'justinmk/vim-sneak'
+"Plug 'mhinz/vim-signify'                              " git guttter, alternate
+"Plug 'junegunn/seoul256.vim'
+"Plug 'thiagoalessio/rainbow_levels.vim'
+"Plug 'jceb/vim-orgmode'
+"Plug 'tpope/vim-speeddating' " required for orgmode
+"Plug 'lambdalisue/vim-rplugin' " required from lista I guess
+
+" Graveyard
+" Plug 'Yggdroot/indentLine'                            " show indentation levels, kind of nice
+" https://github.com/square/maximum-awesome             " vimrc, pretty old
+" Plug 'lornix/vim-scrollbar'                           " scrollbar that doesn't appear to work exactly right
+" Plug 'Zarainia/vim-scrollbar'                         " similar to lornix/vim-scrollbar
+" https://github.com/vimwiki/vimwiki                    " personal wiki
+" https://github.com/spf13/spf13-vim                    " old vimrc
+" https://github.com/davidhalter/jedi-vim               " python autocompletion
+" https://github.com/Yggdroot/indentLine                " show indentation levels, kind of nice, but not worth the visual noise
 
 """""""""""""""""""""""
 """ START VIM-VISUAL-MULTI
@@ -700,33 +736,6 @@ endfunction
 
 "set timeoutlen=1000 ttimeoutlen=0 " https://www.johnhawthorn.com/2012/09/vi-escape-delays/
 " set tagcase=smart https://robertbasic.com/blog/smarter-tag-search-in-vim/
-
-" Graveyard
-"Plug 'ctrlpvim/ctrlp.vim'
-"Plug 'zefei/vim-colortuner'
-"Plug 'vim-ctrlspace/vim-ctrlspace'
-"Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
-"Plug 'wincent/command-t'
-"Plug 'lifepillar/vim-mucomplete'
-"Plug 'terryma/vim-multiple-cursors'
-"Plug 'tpope/vim-surround'
-"Plug 'jiangmiao/auto-pairs'
-"Plug 'StanAngeloff/php.vim'
-"Plug 'flazz/vim-colorschemes'
-"Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
-"Plug 'yuttie/comfortable-motion.vim'
-"Plug 'amiorin/vim-project'
-"Plug 'terryma/vim-expand-region'
-"Plug 'easymotion/vim-easymotion'
-"Plug 'haya14busa/incsearch.vim'
-"Plug 'vim-scripts/SearchComplete'
-"Plug 'justinmk/vim-sneak'
-"Plug 'mhinz/vim-signify'                              " git guttter, alternate
-"Plug 'junegunn/seoul256.vim'
-"Plug 'thiagoalessio/rainbow_levels.vim'
-"Plug 'jceb/vim-orgmode'
-"Plug 'tpope/vim-speeddating' " required for orgmode
-"Plug 'lambdalisue/vim-rplugin' " required from lista I guess
 
 " https://vi.stackexchange.com/questions/6730/how-to-get-rid-of-the-command-line-bar
 set noshowmode  " to get rid of thing like --INSERT--
