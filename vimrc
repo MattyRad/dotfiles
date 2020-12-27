@@ -1,5 +1,4 @@
-" Initial config copied from
-" https://github.com/amix/vimrc
+" Config is merged from base vimrc at https://github.com/amix/vimrc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -35,6 +34,7 @@ set wildmenu
 " Ignore compiled files
 set wildignore=*.o,*~,*.pyc
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 
 "Always show current position
 set ruler
@@ -277,11 +277,12 @@ endif
 " => Turn persistent undo on
 "    means that you can undo even when you close a buffer/VIM
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-try
-    set undodir=~/.vim_runtime/temp_dirs/undodir
-    set undofile
-catch
-endtry
+"try
+"    set undodir=~/.vim_runtime/temp_dirs/undodir
+"    set undofile
+"catch
+"endtry
+" note: this is useful in theory, but I actually find that it's harder to remember where I stopped
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -362,10 +363,9 @@ autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
 " => Start personal section
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if empty(glob("~/.vim/autoload/plug.vim"))
-    " https://stackoverflow.com/questions/47953512/how-to-ensure-plugin-manager-is-installed
     execute '!mkdir -p ~/.vim/autoload && wget -O ~/.vim/autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
     execute '!mkdir -p ~/.config/nvim; ln -s ~/.vimrc ~/.config/nvim/init.vim'
-    autocmd VimEnter * PlugInstall                        " https://stackoverflow.com/questions/6821033/vim-how-to-run-a-command-immediately-when-starting-vim
+    autocmd VimEnter * PlugInstall
 endif
 
 call plug#begin('~/.vim/plugged')
@@ -387,7 +387,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'Raimondi/delimitMate'                           " matching delimiters
     Plug 'ryanoasis/vim-devicons'                         " icons in buffers etc
     Plug 'lambdalisue/lista.nvim'                         " line filtering per file
-    Plug 'scrooloose/nerdtree'
+    "Plug 'scrooloose/nerdtree'
     "if executable('node')
     ""    Plug 'neoclide/coc.nvim', {'branch': 'release'}
     "endif
@@ -447,6 +447,23 @@ let g:VM_highlight_matches = 'underline'   " some text
 """ END VIM-VISUAL-MULTI
 """""""""""""""""""""""
 
+" https://www.reddit.com/r/vim/comments/3hwall/how_to_close_vim_when_last_buffer_is_deleted/
+function! CloseOnLast()
+    let cnt = 0
+
+    for i in range(0, bufnr("$"))
+        if buflisted(i)
+            let cnt += 1
+        endif
+    endfor
+
+    if cnt <= 1
+        q
+    else
+        bw
+    endif
+ endfunction
+
 " nvim
 " somehow nvim changes beam cursors to block cursors https://github.com/neovim/neovim/issues/6005
 set guicursor=
@@ -464,11 +481,11 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 " nerdtree
 " Start NERDTree
 " autoopen
-autocmd VimEnter * NERDTree
+"autocmd VimEnter * NERDTree
 " Go to previous (last accessed) window.
-autocmd VimEnter * wincmd p
+"autocmd VimEnter * wincmd p
 " autoclose if it's the last thing open
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 """""""""""""""""""""""
 """ START SEMANTIC-HIGHLIGHTING
@@ -493,14 +510,16 @@ set updatetime=20                                  " improve delay to show chang
 autocmd BufWritePre * %s/\s\+$//e       " trim trailing whitespace
 
 " Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+if exists("*SyntasticStatuslineFlag")
+    set statusline+=%#warningmsg#
+    set statusline+=%{SyntasticStatuslineFlag()}
+    set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+    let g:syntastic_always_populate_loc_list = 1
+    let g:syntastic_auto_loc_list = 1
+    let g:syntastic_check_on_open = 1
+    let g:syntastic_check_on_wq = 0
+endif
 
 " Rooter
 let g:rooter_silent_chdir = 1                       " To stop Rooter echoing the project directory
@@ -545,11 +564,7 @@ endfunction
 
 let g:onedark_terminal_italics = 1
 " onedark.vim override: Don't set a background color when running in a terminal;
-" just use the terminal's background color
-" `gui` is the hex color code used in GUI mode/nvim true-color mode
-" `cterm` is the color code used in 256-color mode
-" `cterm16` is the color code used in 16-color mode
-if (has("autocmd") && !has("gui_running") && HasColorScheme('onedark'))
+if (has("autocmd") && !has("gui_running") && exists("onedark"))
   augroup colorset
     autocmd!
     let s:white = { "gui": "#ABB2BF", "cterm": "145", "cterm16" : "7" }
@@ -605,6 +620,23 @@ vnoremap <C-p> <esc>p
 
 inoremap <C-v> <esc>pi
 
+nnoremap <C-z> u
+nnoremap <C-S-z> r
+
+vnoremap <C-z> <esc>u
+vnoremap <C-S-z> <esc>r
+
+inoremap <C-s> <esc>:w<cr>
+nnoremap <C-s> :w<cr>
+
+nnoremap <C-left> b
+nnoremap <C-right> e<right>
+
+inoremap <C-left> <esc>b
+inoremap <C-right> <esc>e<right>
+
+nnoremap <C-A-down> :call CloseOnLast()<CR>
+
 " Tabbing
 set smartindent
 set cindent
@@ -619,7 +651,7 @@ set synmaxcol=200
 
 set ve+=onemore                        " where have you been all my life https://superuser.com/questions/918500/how-to-set-cursor-to-after-last-character-in-vim
 nnoremap <end> $li
-nnoremap <home> 0i
+nnoremap <home> ^i
 
 " Record last position of cursor
 function! ResCur()
@@ -645,8 +677,6 @@ endfunction
 " ==================
 
 "set timeoutlen=1000 ttimeoutlen=0 " https://www.johnhawthorn.com/2012/09/vi-escape-delays/
-"set hlsearch
-"set incsearch
 " set tagcase=smart https://robertbasic.com/blog/smarter-tag-search-in-vim/
 
 " Graveyard
