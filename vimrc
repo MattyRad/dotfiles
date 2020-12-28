@@ -441,13 +441,6 @@ call plug#end()
 "
 "
 "
-" https://github.com/lunixbochs/ActualVim
-" https://github.com/vim-awesome/vim-awesome
-" https://github.com/tpope/vim-unimpaired
-" https://github.com/jiangmiao/auto-pairs
-" https://github.com/junegunn/vim-easy-align
-" https://github.com/jarun/nnn
-" https://github.com/mhinz/vim-galore
 "Plug 'tpope/vim-sleuth'
 "Plug 'unblevable/quick-scope'
 "Plug 'jeetsukumaran/vim-buffergator'
@@ -468,34 +461,41 @@ call plug#end()
 
 
 " Graveyard
-" Plug 'Yggdroot/indentLine'                            " show indentation levels, kind of nice
+" https://github.com/Yggdroot/indentLine'               " show indentation levels, kind of nice
 " https://github.com/square/maximum-awesome             " vimrc, pretty old
-" Plug 'lornix/vim-scrollbar'                           " scrollbar that doesn't appear to work exactly right
-" Plug 'Zarainia/vim-scrollbar'                         " similar to lornix/vim-scrollbar
+" https://github.com/lornix/vim-scrollbar'              " scrollbar that doesn't appear to work exactly right
+" https://github.com/Zarainia/vim-scrollbar'            " similar to lornix/vim-scrollbar
 " https://github.com/vimwiki/vimwiki                    " personal wiki
 " https://github.com/spf13/spf13-vim                    " old vimrc
 " https://github.com/davidhalter/jedi-vim               " python autocompletion
 " https://github.com/Yggdroot/indentLine                " show indentation levels, kind of nice, but not worth the visual noise
-"Plug 'lambdalisue/vim-rplugin'                         " required from lista in vim proper, I guess
-"Plug 'tpope/vim-speeddating'                           " required for orgmode
-"Plug 'jceb/vim-orgmode'                                " I really like org-mode, but its vim plugin has a bit of a learning curve
-"Plug 'thiagoalessio/rainbow_levels.vim'                " Neat concept, not the most practical exepct for maybe big xml documents
-"Plug 'junegunn/seoul256.vim'                           " Decent color theme
-"Plug 'mhinz/vim-signify'                               " git guttter, alternate, colors out of the box didn't jive as well as git-gutter proper
-"Plug 'yuttie/comfortable-motion.vim'                   " Smooth scrolling, I think vim-smoothie is a bit better
-"Plug 'justinmk/vim-sneak'                              " Similar to easymotion, but required forethought
-"Plug 'Xuyuanp/scrollbar.nvim'                          " scrollbar, only works for neovim
-"Plug 'obcat/vim-sclow'                                 " scrollbar, neovim not supported
+" https://github.com/lambdalisue/vim-rplugin'           " required from lista in vim proper, I guess
+" https://github.com/tpope/vim-speeddating'             " required for orgmode
+" https://github.com/jceb/vim-orgmode'                  " I really like org-mode, but its vim plugin has a bit of a learning curve
+" https://github.com/thiagoalessio/rainbow_levels.vim'  " Neat concept, not the most practical exepct for maybe big xml documents
+" https://github.com/junegunn/seoul256.vim'             " Decent color theme
+" https://github.com/mhinz/vim-signify'                 " git guttter, alternate, colors out of the box didn't jive as well as git-gutter proper
+" https://github.com/yuttie/comfortable-motion.vim'     " Smooth scrolling, I think vim-smoothie is a bit better
+" https://github.com/justinmk/vim-sneak'                " Similar to easymotion, but required forethought
+" https://github.com/Xuyuanp/scrollbar.nvim'            " scrollbar, only works for neovim
+" https://github.com/obcat/vim-sclow'                   " scrollbar, neovim not supported
 " https://github.com/godlygeek/tabular                  " interesting, but not that common. multiple cursors should cover repeat formatting
 " https://github.com/editor-bootstrap/vim-bootstrap     " vimrc generator, some of the items here were trasferred to this
 " https://github.com/tpope/vim-sensible                 " vimrc defaults that are sane and sensible, most already exists here
-"Plug 'terryma/vim-multiple-cursors'                    " doesn't work nearly as well as the enabled one
-"Plug 'jistr/vim-nerdtree-tabs'                         " no longer maintained, I'm not familiar enough with nerdtree yet
-"Plug 'tpope/vim-commentary'                            " multiple cursors genrally takes less mental energy to add/remove comments
-"Plug 'majutsushi/tagbar'                               " seems useful, but eyeballing a file also works fine
-"Plug 'wfxr/minimap.vim', {'do': ':!cargo install --locked code-minimap'} " minimaps for scrolling, seems awesome but didn't work out of the box
-"Plug 'severin-lemaignan/vim-minimap'                   " code based minimap. neat, but causes slowdown
-"Plug 'xolox/vim-misc'                                  " included with maximum-awesome, not really sure what it's for, specifically
+" https://github.com/terryma/vim-multiple-cursors'      " doesn't work nearly as well as the enabled one
+" https://github.com/jistr/vim-nerdtree-tabs'           " no longer maintained, I'm not familiar enough with nerdtree yet
+" https://github.com/tpope/vim-commentary'              " multiple cursors genrally takes less mental energy to add/remove comments
+" https://github.com/majutsushi/tagbar'                 " seems useful, but eyeballing a file also works fine
+" https://github.com/wfxr/minimap.vim'                  " minimaps for scrolling, seems awesome but didn't work out of the box
+" https://github.com/severin-lemaignan/vim-minimap'     " code based minimap. neat, but causes slowdown
+" https://github.com/xolox/vim-misc'                    " included with maximum-awesome, not really sure what it's for, specifically
+" https://github.com/lunixbochs/ActualVim               " for use with sublime text 3 itself
+" https://github.com/vim-awesome/vim-awesome            " https://vimawesome.com/
+" https://github.com/jiangmiao/auto-pairs               " same as delimitMate I think, but not as recently maintained
+" https://github.com/tpope/vim-unimpaired               " mappings for delimiters
+" https://github.com/junegunn/vim-easy-align            " similar to tabular
+" https://github.com/mhinz/vim-galore                   " comprehensive vim guide
+" https://github.com/jarun/nnn                          " useful looking file manager, keep it in mind
 
 """""""""""""""""""""""
 """ START VIM-VISUAL-MULTI
@@ -689,6 +689,7 @@ inoremap <C-s> <esc>:w<cr>
 nnoremap <C-s> :w<cr>
 vnoremap <C-s> <esc>:w<cr>
 
+nnoremap <tab> i<tab><esc>
 
 inoremap <C-q> <esc>
 vnoremap <C-q> <esc>
