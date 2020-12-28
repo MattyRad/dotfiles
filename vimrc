@@ -406,6 +406,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'ojroques/vim-scrollstatus'                      " add scrollbar to statusline (vim-airline)
     Plug 'haya14busa/incsearch.vim'                       " helps get rid of search highlighting after search, no more searching /asdfawegag
     Plug 'joshdick/onedark.vim'                           " color theme
+    Plug 'vim-scripts/SearchComplete'                     " autocomplete words while searching
     " harmless plugins: plugins I don't actively use but aren't intrusive and could be useful later
     Plug 'easymotion/vim-easymotion'
     Plug 'scrooloose/nerdtree'
@@ -430,6 +431,7 @@ call plug#end()
 "Plug 'ctrlpvim/ctrlp.vim'
 " https://github.com/yangyangwithgnu/use_vim_as_ide
 " https://github.com/dense-analysis/ale
+"Plug 'lifepillar/vim-mucomplete' " minimalist
 "
 "
 "
@@ -446,7 +448,6 @@ call plug#end()
 " https://github.com/jarun/nnn
 " https://github.com/mhinz/vim-galore
 "Plug 'Xuyuanp/nerdtree-git-plugin'
-"Plug 'majutsushi/tagbar'
 "Plug 'tpope/vim-sleuth'
 "Plug 'unblevable/quick-scope'
 "Plug 'jeetsukumaran/vim-buffergator'
@@ -465,20 +466,12 @@ call plug#end()
 
 " Old Graveyard
 "Plug 'zefei/vim-colortuner'
-"Plug 'vim-ctrlspace/vim-ctrlspace'
 "Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
-"Plug 'wincent/command-t'
-"Plug 'lifepillar/vim-mucomplete'
-"Plug 'terryma/vim-multiple-cursors'
 "Plug 'tpope/vim-surround'
-"Plug 'jiangmiao/auto-pairs'
 "Plug 'StanAngeloff/php.vim'
-"Plug 'flazz/vim-colorschemes'
 "Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
 "Plug 'amiorin/vim-project'
 "Plug 'terryma/vim-expand-region'
-"Plug 'easymotion/vim-easymotion'
-"Plug 'vim-scripts/SearchComplete'
 
 " Graveyard
 " Plug 'Yggdroot/indentLine'                            " show indentation levels, kind of nice
@@ -502,6 +495,10 @@ call plug#end()
 " https://github.com/godlygeek/tabular                  " interesting, but not that common. multiple cursors should cover repeat formatting
 " https://github.com/editor-bootstrap/vim-bootstrap     " vimrc generator, some of the items here were trasferred to this
 " https://github.com/tpope/vim-sensible                 " vimrc defaults that are sane and sensible, most already exists here
+"Plug 'terryma/vim-multiple-cursors'                    " doesn't work nearly as well as the enabled one
+"Plug 'jistr/vim-nerdtree-tabs'                         " no longer maintained, I'm not familiar enough with nerdtree yet
+"Plug 'tpope/vim-commentary'                            " multiple cursors genrally takes less mental energy to add/remove comments
+"Plug 'majutsushi/tagbar'                               " seems useful, but eyeballing a file also works fine
 
 """""""""""""""""""""""
 """ START VIM-VISUAL-MULTI
