@@ -367,12 +367,6 @@ autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Start personal section
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"if empty(glob("~/.vim/autoload/plug.vim"))
-"    execute '!mkdir -p ~/.vim/autoload && wget -O ~/.vim/autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-"    execute '!mkdir -p ~/.config/nvim; ln -s ~/.vimrc ~/.config/nvim/init.vim'
-"    autocmd VimEnter * PlugInstall
-"endif
-
 let vimplug_exists=expand('~/.vim/autoload/plug.vim')
 let curl_exists=expand('curl')
 
@@ -387,10 +381,9 @@ if !filereadable(vimplug_exists)
   let g:not_finish_vimplug = "yes"
 
   autocmd VimEnter * PlugInstall
-endif
 
-" Required:
-call plug#begin(expand('~/./plugged'))
+  execute '!mkdir -p ~/.config/nvim; ln -s ~/.vimrc ~/.config/nvim/init.vim'
+endif
 
 call plug#begin('~/.vim/plugged')
     Plug 'VundleVim/Vundle.vim'
@@ -415,54 +408,60 @@ call plug#begin('~/.vim/plugged')
     Plug 'joshdick/onedark.vim'                           " color theme
     " harmless plugins: plugins I don't actively use but aren't intrusive and could be useful later
     Plug 'easymotion/vim-easymotion'
+    Plug 'scrooloose/nerdtree'
 call plug#end()
 
-" Pending review
-"Plug 'Xuyuanp/scrollbar.nvim'                         " scrollbars
-"Plug 'obcat/vim-sclow'
+" Completion Engines
+"if executable('node')
+""    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"endif
+" https://github.com/vim-ctrlspace/vim-ctrlspace
+" https://github.com/prabirshrestha/vim-lsp
+" https://github.com/ervandew/supertab
+" https://github.com/wincent/command-t
+" https://github.com/Shougo/denite.nvim
+" https://github.com/autozimu/LanguageClient-neovim
+" https://github.com/Shougo/deoplete.nvim
+"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+"Plug 'junegunn/fzf.vim'
+"https://github.com/ncm2/ncm2 (prefer this to below)
+"https://github.com/prabirshrestha/asyncomplete.vim
+" https://github.com/liuchengxu/vim-clap
+"Plug 'ctrlpvim/ctrlp.vim'
+" https://github.com/yangyangwithgnu/use_vim_as_ide
+" https://github.com/dense-analysis/ale
+"
+"
+"
 "if executable('cargo')
 "    Plug 'wfxr/minimap.vim', {'do': ':!cargo install --locked code-minimap'} " minimap for scrolling
 "endif
 " https://github.com/lunixbochs/ActualVim
 "Plug 'severin-lemaignan/vim-minimap'
 "Plug 'vim-syntastic/syntastic'                        " language checking tool
-"Plug 'scrooloose/nerdtree'
-"if executable('node')
-""    Plug 'neoclide/coc.nvim', {'branch': 'release'}
-"endif
-" https://github.com/vim-ctrlspace/vim-ctrlspace
-" https://github.com/editor-bootstrap/vim-bootstrap
 " https://github.com/vim-awesome/vim-awesome
-" https://github.com/Raimondi/delimitMate
-" https://github.com/prabirshrestha/vim-lsp
-" https://github.com/Shougo/denite.nvim
-" https://github.com/justinmk/vim-sneak
-" https://github.com/mhinz/vim-signify
-" https://github.com/godlygeek/tabular
 " https://github.com/tpope/vim-unimpaired
-" https://github.com/wincent/command-t
-" https://github.com/ervandew/supertab
 " https://github.com/jiangmiao/auto-pairs
-" https://github.com/autozimu/LanguageClient-neovim
 " https://github.com/junegunn/vim-easy-align
-" https://github.com/tpope/vim-sensible
-" https://github.com/Shougo/deoplete.nvim
-" https://github.com/yangyangwithgnu/use_vim_as_ide
 " https://github.com/jarun/nnn
-" https://github.com/dense-analysis/ale
 " https://github.com/mhinz/vim-galore
 "Plug 'Xuyuanp/nerdtree-git-plugin'
 "Plug 'majutsushi/tagbar'
 "Plug 'tpope/vim-sleuth'
 "Plug 'unblevable/quick-scope'
 "Plug 'jeetsukumaran/vim-buffergator'
-"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-"Plug 'junegunn/fzf.vim'
+"https://github.com/tpope/vim-obsession
+"https://github.com/xolox/vim-session
+"
+"let g:make = 'gmake'
+"if exists('make')
+"        let g:make = 'make'
+"endif
+"Plug 'Shougo/vimproc.vim', {'do': g:make}
 
-" https://github.com/liuchengxu/vim-clap
-"Plug 'ctrlpvim/ctrlp.vim'
 
-" On the fence:
+" On the fence probably not too useful
+" Plug 'xolox/vim-misc'
 
 " Old Graveyard
 "Plug 'zefei/vim-colortuner'
@@ -480,7 +479,6 @@ call plug#end()
 "Plug 'terryma/vim-expand-region'
 "Plug 'easymotion/vim-easymotion'
 "Plug 'vim-scripts/SearchComplete'
-"Plug 'justinmk/vim-sneak'
 
 " Graveyard
 " Plug 'Yggdroot/indentLine'                            " show indentation levels, kind of nice
@@ -498,6 +496,12 @@ call plug#end()
 "Plug 'junegunn/seoul256.vim'                           " Decent color theme
 "Plug 'mhinz/vim-signify'                               " git guttter, alternate, colors out of the box didn't jive as well as git-gutter proper
 "Plug 'yuttie/comfortable-motion.vim'                   " Smooth scrolling, I think vim-smoothie is a bit better
+"Plug 'justinmk/vim-sneak'                              " Similar to easymotion, but required forethought
+"Plug 'Xuyuanp/scrollbar.nvim'                          " scrollbar, only works for neovim
+"Plug 'obcat/vim-sclow'                                 " scrollbar, neovim not supported
+" https://github.com/godlygeek/tabular                  " interesting, but not that common. multiple cursors should cover repeat formatting
+" https://github.com/editor-bootstrap/vim-bootstrap     " vimrc generator, some of the items here were trasferred to this
+" https://github.com/tpope/vim-sensible                 " vimrc defaults that are sane and sensible, most already exists here
 
 """""""""""""""""""""""
 """ START VIM-VISUAL-MULTI
@@ -522,12 +526,16 @@ set guicursor=
 " supertab
 let g:SuperTabDefaultCompletionType = "<c-n>"
 
+"" Copy/Paste/Cut
 " copy/paste - https://unix.stackexchange.com/questions/12535/how-to-copy-text-from-vim-to-an-external-program
 "set clipboard=unnamedplus
 "nnoremap y "*y
 "vnoremap y "*y
 "nnoremap <C-p> "*gP
 "vnoremap <C-p> "*gP
+if has('unnamedplus')
+  set clipboard=unnamed,unnamedplus
+endif
 
 " nerdtree
 " Start NERDTree
@@ -573,26 +581,10 @@ autocmd BufWritePre * %s/\s\+$//e       " trim trailing whitespace
 let g:rooter_silent_chdir = 1                       " To stop Rooter echoing the project directory
 
 " Airline
-function! GitStatus()
-  let [a,m,r] = GitGutterGetHunkSummary()
-  return printf('+%d ~%d -%d', a, m, r)
-endfunction
-
-let vimplug_exists=expand('~/.vim/autoload/plug.vim')
-let curl_exists=expand('curl')
-
-if !filereadable(vimplug_exists)
-    let g:airline#extensions#tabline#enabled = 1
-    let g:airline#extensions#tabline#left_sep = ' '
-    let g:airline#extensions#tabline#left_alt_sep = ''
-    let g:airline#extensions#tabline#formatter = 'unique_tail'
-    let g:airline_section_x = '%{GitStatus()}  %{getcwd()}   %{ScrollStatus()}'
-    let g:airline_section_y = airline#section#create_right(['filetype'])
-    let g:airline_section_z = airline#section#create([
-                \ '%#__accent_bold#%3l%#__restore__#/%L', ' ',
-                \ '%#__accent_bold#%3v%#__restore__#/%3{virtcol("$") - 1}',
-                \ ])
-    let g:airline_theme='bubblegum'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='bubblegum'
+if filereadable(vimplug_exists)
+    let g:airline_section_x = '%{ScrollStatus()}'
 endif
 
 " Rainbow parenthesis
@@ -653,6 +645,7 @@ nnoremap <space> i<space>
 vnoremap r <esc>caw
 nnoremap <A-up> :MRU<cr>
 nnoremap <C-w> :call CloseBufferOrQuit()<cr>
+nnoremap <A-down> :call CloseBufferOrQuit()<cr>
 nnoremap <C-x> dd
 inoremap rr <esc>caw
 " phone help
@@ -758,3 +751,9 @@ endfunction
 set noshowmode  " to get rid of thing like --INSERT--
 set noshowcmd  " to get rid of display of last command
 set shortmess+=F  " to get rid of the file name displayed in the command line bar
+
+" https://stackoverflow.com/questions/307148/vim-scrolling-slowly
+set ttyfast
+
+" https://vim.fandom.com/wiki/Keep_your_cursor_centered_vertically_on_the_screen
+set scrolloff=500
