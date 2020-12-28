@@ -411,7 +411,6 @@ call plug#end()
 ""    Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "endif
 " https://github.com/vim-ctrlspace/vim-ctrlspace
-" https://github.com/liuchengxu/vim-clap
 " https://github.com/editor-bootstrap/vim-bootstrap
 " https://github.com/vim-awesome/vim-awesome
 " https://github.com/Raimondi/delimitMate
@@ -440,8 +439,10 @@ call plug#end()
 "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 "Plug 'junegunn/fzf.vim'
 
-" Old Graveyard
+" https://github.com/liuchengxu/vim-clap
 "Plug 'ctrlpvim/ctrlp.vim'
+
+" Old Graveyard
 "Plug 'zefei/vim-colortuner'
 "Plug 'vim-ctrlspace/vim-ctrlspace'
 "Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
@@ -453,19 +454,12 @@ call plug#end()
 "Plug 'StanAngeloff/php.vim'
 "Plug 'flazz/vim-colorschemes'
 "Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
-"Plug 'yuttie/comfortable-motion.vim'
 "Plug 'amiorin/vim-project'
 "Plug 'terryma/vim-expand-region'
 "Plug 'easymotion/vim-easymotion'
 "Plug 'haya14busa/incsearch.vim'
 "Plug 'vim-scripts/SearchComplete'
 "Plug 'justinmk/vim-sneak'
-"Plug 'mhinz/vim-signify'                              " git guttter, alternate
-"Plug 'junegunn/seoul256.vim'
-"Plug 'thiagoalessio/rainbow_levels.vim'
-"Plug 'jceb/vim-orgmode'
-"Plug 'tpope/vim-speeddating' " required for orgmode
-"Plug 'lambdalisue/vim-rplugin' " required from lista I guess
 
 " Graveyard
 " Plug 'Yggdroot/indentLine'                            " show indentation levels, kind of nice
@@ -476,6 +470,13 @@ call plug#end()
 " https://github.com/spf13/spf13-vim                    " old vimrc
 " https://github.com/davidhalter/jedi-vim               " python autocompletion
 " https://github.com/Yggdroot/indentLine                " show indentation levels, kind of nice, but not worth the visual noise
+"Plug 'lambdalisue/vim-rplugin'                         " required from lista in vim proper, I guess
+"Plug 'tpope/vim-speeddating'                           " required for orgmode
+"Plug 'jceb/vim-orgmode'                                " I really like org-mode, but its vim plugin has a bit of a learning curve
+"Plug 'thiagoalessio/rainbow_levels.vim'                " Neat concept, not the most practical exepct for maybe big xml documents
+"Plug 'junegunn/seoul256.vim'                           " Decent color theme
+"Plug 'mhinz/vim-signify'                               " git guttter, alternate, colors out of the box didn't jive as well as git-gutter proper
+"Plug 'yuttie/comfortable-motion.vim'                   " Smooth scrolling, I think vim-smoothie is a bit better
 
 """""""""""""""""""""""
 """ START VIM-VISUAL-MULTI
@@ -572,7 +573,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = ''
 let g:airline#extensions#tabline#formatter = 'unique_tail'
-let g:airline_section_x = '%{ScrollStatus()}'
+let g:airline_section_x = '%{getcwd()}   %{ScrollStatus()}'
 let g:airline_section_y = airline#section#create_right(['filetype'])
 let g:airline_section_z = airline#section#create([
             \ '%#__accent_bold#%3l%#__restore__#/%L', ' ',
@@ -610,14 +611,14 @@ function! HasColorScheme(name) abort
 endfunction
 
 let g:onedark_terminal_italics = 1
-" onedark.vim override: Don't set a background color when running in a terminal;
-if (has("autocmd") && !has("gui_running") && exists("onedark"))
-  augroup colorset
-    autocmd!
-    let s:white = { "gui": "#ABB2BF", "cterm": "145", "cterm16" : "7" }
-    autocmd ColorScheme * call onedark#set_highlight("Normal", { "fg": s:white }) " `bg` will not be styled since there is no `bg` setting
-  augroup END
-endif
+"" onedark.vim override: Don't set a background color when running in a terminal;
+"if (has("autocmd") && !has("gui_running") && exists("onedark"))
+"  augroup colorset
+"    autocmd!
+"    let s:white = { "gui": "#ABB2BF", "cterm": "145", "cterm16" : "7" }
+"    autocmd ColorScheme * call onedark#set_highlight("Normal", { "fg": s:white }) " `bg` will not be styled since there is no `bg` setting
+"  augroup END
+"endif
 
 if HasColorScheme('onedark')
     colorscheme onedark
