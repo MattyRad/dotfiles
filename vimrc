@@ -407,9 +407,12 @@ call plug#begin('~/.vim/plugged')
     Plug 'haya14busa/incsearch.vim'                       " helps get rid of search highlighting after search, no more searching /asdfawegag
     Plug 'joshdick/onedark.vim'                           " color theme
     Plug 'vim-scripts/SearchComplete'                     " autocomplete words while searching
+
     " harmless plugins: plugins I don't actively use but aren't intrusive and could be useful later
-    Plug 'easymotion/vim-easymotion'
-    Plug 'scrooloose/nerdtree'
+    Plug 'easymotion/vim-easymotion'                      " jump around easily
+    Plug 'scrooloose/nerdtree'                            " nerdtree file tree sidebar
+    Plug 'Xuyuanp/nerdtree-git-plugin'                    " show git changes in nerdtree
+    Plug 'terryma/vim-expand-region'                      " gradually expand a region in visual mode
 call plug#end()
 
 " Completion Engines
@@ -432,27 +435,30 @@ call plug#end()
 " https://github.com/yangyangwithgnu/use_vim_as_ide
 " https://github.com/dense-analysis/ale
 "Plug 'lifepillar/vim-mucomplete' " minimalist
-"
-"
-"
-"if executable('cargo')
-"    Plug 'wfxr/minimap.vim', {'do': ':!cargo install --locked code-minimap'} " minimap for scrolling
-"endif
-" https://github.com/lunixbochs/ActualVim
-"Plug 'severin-lemaignan/vim-minimap'
 "Plug 'vim-syntastic/syntastic'                        " language checking tool
+"Plug 'SirVer/ultisnips'
+"Plug 'honza/vim-snippets'
+"
+"
+"
+" https://github.com/lunixbochs/ActualVim
 " https://github.com/vim-awesome/vim-awesome
 " https://github.com/tpope/vim-unimpaired
 " https://github.com/jiangmiao/auto-pairs
 " https://github.com/junegunn/vim-easy-align
 " https://github.com/jarun/nnn
 " https://github.com/mhinz/vim-galore
-"Plug 'Xuyuanp/nerdtree-git-plugin'
 "Plug 'tpope/vim-sleuth'
 "Plug 'unblevable/quick-scope'
 "Plug 'jeetsukumaran/vim-buffergator'
 "https://github.com/tpope/vim-obsession
 "https://github.com/xolox/vim-session
+"Plug 'zefei/vim-colortuner'
+"Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
+"Plug 'tpope/vim-surround'
+"Plug 'StanAngeloff/php.vim'
+"Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
+"Plug 'amiorin/vim-project'
 "
 "let g:make = 'gmake'
 "if exists('make')
@@ -460,18 +466,6 @@ call plug#end()
 "endif
 "Plug 'Shougo/vimproc.vim', {'do': g:make}
 
-
-" On the fence probably not too useful
-" Plug 'xolox/vim-misc'
-
-" Old Graveyard
-"Plug 'zefei/vim-colortuner'
-"Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
-"Plug 'tpope/vim-surround'
-"Plug 'StanAngeloff/php.vim'
-"Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
-"Plug 'amiorin/vim-project'
-"Plug 'terryma/vim-expand-region'
 
 " Graveyard
 " Plug 'Yggdroot/indentLine'                            " show indentation levels, kind of nice
@@ -499,6 +493,9 @@ call plug#end()
 "Plug 'jistr/vim-nerdtree-tabs'                         " no longer maintained, I'm not familiar enough with nerdtree yet
 "Plug 'tpope/vim-commentary'                            " multiple cursors genrally takes less mental energy to add/remove comments
 "Plug 'majutsushi/tagbar'                               " seems useful, but eyeballing a file also works fine
+"Plug 'wfxr/minimap.vim', {'do': ':!cargo install --locked code-minimap'} " minimaps for scrolling, seems awesome but didn't work out of the box
+"Plug 'severin-lemaignan/vim-minimap'                   " code based minimap. neat, but causes slowdown
+"Plug 'xolox/vim-misc'                                  " included with maximum-awesome, not really sure what it's for, specifically
 
 """""""""""""""""""""""
 """ START VIM-VISUAL-MULTI
