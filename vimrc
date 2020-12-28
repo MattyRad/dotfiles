@@ -367,11 +367,30 @@ autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Start personal section
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if empty(glob("~/.vim/autoload/plug.vim"))
-    execute '!mkdir -p ~/.vim/autoload && wget -O ~/.vim/autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-    execute '!mkdir -p ~/.config/nvim; ln -s ~/.vimrc ~/.config/nvim/init.vim'
-    autocmd VimEnter * PlugInstall
+"if empty(glob("~/.vim/autoload/plug.vim"))
+"    execute '!mkdir -p ~/.vim/autoload && wget -O ~/.vim/autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+"    execute '!mkdir -p ~/.config/nvim; ln -s ~/.vimrc ~/.config/nvim/init.vim'
+"    autocmd VimEnter * PlugInstall
+"endif
+
+let vimplug_exists=expand('~/.vim/autoload/plug.vim')
+let curl_exists=expand('curl')
+
+if !filereadable(vimplug_exists)
+  if !executable(curl_exists)
+    echoerr "You have to install curl or first install vim-plug yourself!"
+    execute "q!"
+  endif
+  echo "Installing Vim-Plug..."
+  echo ""
+  silent exec "!"curl_exists" -fLo " . shellescape(vimplug_exists) . " --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+  let g:not_finish_vimplug = "yes"
+
+  autocmd VimEnter * PlugInstall
 endif
+
+" Required:
+call plug#begin(expand('~/./plugged'))
 
 call plug#begin('~/.vim/plugged')
     Plug 'VundleVim/Vundle.vim'
@@ -385,7 +404,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'airblade/vim-gitgutter'                         " git gutter
     Plug 'luochen1990/rainbow'                            " Highlight matching parents different colors
     Plug 'airblade/vim-rooter'                            " Set project root to current file
-    Plug 'joshdick/onedark.vim'                           " color theme
     Plug 'sheerun/vim-polyglot'                           " language packs
     Plug 'ervandew/supertab'                              " tag completion
     Plug 'Raimondi/delimitMate'                           " matching delimiters
@@ -393,6 +411,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'lambdalisue/lista.nvim'                         " line filtering per file
     Plug 'psliwka/vim-smoothie'                           " smooth scrolling in page-up/down
     Plug 'ojroques/vim-scrollstatus'                      " add scrollbar to statusline (vim-airline)
+    Plug 'haya14busa/incsearch.vim'                       " helps get rid of search highlighting after search, no more searching /asdfawegag
+    Plug 'joshdick/onedark.vim'                           " color theme
     " harmless plugins: plugins I don't actively use but aren't intrusive and could be useful later
     Plug 'easymotion/vim-easymotion'
 call plug#end()
@@ -442,6 +462,8 @@ call plug#end()
 " https://github.com/liuchengxu/vim-clap
 "Plug 'ctrlpvim/ctrlp.vim'
 
+" On the fence:
+
 " Old Graveyard
 "Plug 'zefei/vim-colortuner'
 "Plug 'vim-ctrlspace/vim-ctrlspace'
@@ -457,7 +479,6 @@ call plug#end()
 "Plug 'amiorin/vim-project'
 "Plug 'terryma/vim-expand-region'
 "Plug 'easymotion/vim-easymotion'
-"Plug 'haya14busa/incsearch.vim'
 "Plug 'vim-scripts/SearchComplete'
 "Plug 'justinmk/vim-sneak'
 
@@ -493,23 +514,6 @@ let g:VM_highlight_matches = 'underline'   " some text
 """""""""""""""""""""""
 """ END VIM-VISUAL-MULTI
 """""""""""""""""""""""
-
-" https://www.reddit.com/r/vim/comments/3hwall/how_to_close_vim_when_last_buffer_is_deleted/
-function! CloseOnLast()
-    let cnt = 0
-
-    for i in range(0, bufnr("$"))
-        if buflisted(i)
-            let cnt += 1
-        endif
-    endfor
-
-    if cnt <= 1
-        q
-    else
-        bw
-    endif
- endfunction
 
 " nvim
 " somehow nvim changes beam cursors to block cursors https://github.com/neovim/neovim/issues/6005
@@ -569,18 +573,27 @@ autocmd BufWritePre * %s/\s\+$//e       " trim trailing whitespace
 let g:rooter_silent_chdir = 1                       " To stop Rooter echoing the project directory
 
 " Airline
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = ''
-let g:airline#extensions#tabline#formatter = 'unique_tail'
-let g:airline_section_x = '%{getcwd()}   %{ScrollStatus()}'
-let g:airline_section_y = airline#section#create_right(['filetype'])
-let g:airline_section_z = airline#section#create([
-            \ '%#__accent_bold#%3l%#__restore__#/%L', ' ',
-            \ '%#__accent_bold#%3v%#__restore__#/%3{virtcol("$") - 1}',
-            \ ])
-let g:airline_theme='bubblegum'
-"let g:airline_theme='onedark'
+function! GitStatus()
+  let [a,m,r] = GitGutterGetHunkSummary()
+  return printf('+%d ~%d -%d', a, m, r)
+endfunction
+
+let vimplug_exists=expand('~/.vim/autoload/plug.vim')
+let curl_exists=expand('curl')
+
+if !filereadable(vimplug_exists)
+    let g:airline#extensions#tabline#enabled = 1
+    let g:airline#extensions#tabline#left_sep = ' '
+    let g:airline#extensions#tabline#left_alt_sep = ''
+    let g:airline#extensions#tabline#formatter = 'unique_tail'
+    let g:airline_section_x = '%{GitStatus()}  %{getcwd()}   %{ScrollStatus()}'
+    let g:airline_section_y = airline#section#create_right(['filetype'])
+    let g:airline_section_z = airline#section#create([
+                \ '%#__accent_bold#%3l%#__restore__#/%L', ' ',
+                \ '%#__accent_bold#%3v%#__restore__#/%3{virtcol("$") - 1}',
+                \ ])
+    let g:airline_theme='bubblegum'
+endif
 
 " Rainbow parenthesis
 let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
@@ -590,6 +603,17 @@ let g:lista#custom_mappings = [
       \ ['<up>', '<lista:select_previous_candidate>', 'noremap'],
       \ ['<down>', '<lista:select_next_candidate>', 'noremap'],
       \]
+
+
+set signcolumn=yes " always show git gutter to prevent weird shifting
+
+let g:incsearch#auto_nohlsearch = 1
+map n  <Plug>(incsearch-nohl-n)
+map N  <Plug>(incsearch-nohl-N)
+map *  <Plug>(incsearch-nohl-*)
+map #  <Plug>(incsearch-nohl-#)
+map g* <Plug>(incsearch-nohl-g*)
+map g# <Plug>(incsearch-nohl-g#)
 
 " CoC
 " https://github.com/neoclide/coc.nvim
@@ -603,13 +627,6 @@ let g:coc_disable_startup_warning = 1
 "set number " Line numbers
 "highlight LineNr term=bold cterm=NONE ctermfg=Black ctermbg=NONE gui=NONE guifg=Black guibg=NONE
 
-" One dark theme
-" https://stackoverflow.com/questions/5698284/in-my-vimrc-how-can-i-check-for-the-existence-of-a-color-scheme
-function! HasColorScheme(name) abort
-    let pat = 'colors/'.a:name.'.vim'
-    return !empty(globpath(&rtp, pat))
-endfunction
-
 let g:onedark_terminal_italics = 1
 "" onedark.vim override: Don't set a background color when running in a terminal;
 "if (has("autocmd") && !has("gui_running") && exists("onedark"))
@@ -620,9 +637,9 @@ let g:onedark_terminal_italics = 1
 "  augroup END
 "endif
 
-if HasColorScheme('onedark')
+if filereadable(expand("~/.vim/plugged/onedark.vim/autoload/onedark.vim"))
     colorscheme onedark
-elseif
+else
     colorscheme peachpuff
 endif
 
@@ -631,7 +648,8 @@ set mouse=a
 
 " Mappings
 nnoremap r caw
-nnoremap <C-f> :Lista<cr>
+nnoremap <space> i<space>
+"nnoremap <C-f> :Lista<cr>
 vnoremap r <esc>caw
 nnoremap <A-up> :MRU<cr>
 nnoremap <C-w> :call CloseBufferOrQuit()<cr>
@@ -694,8 +712,6 @@ nnoremap <C-right> e<right>
 inoremap <C-left> <esc>b
 inoremap <C-right> <esc>e<right>
 
-nnoremap <C-A-down> :call CloseOnLast()<CR>
-
 " Tabbing
 set smartindent
 set cindent
@@ -713,16 +729,16 @@ nnoremap <end> $li
 nnoremap <home> ^i
 
 " Record last position of cursor
-function! ResCur()
-    if line("'\"") <= line("$")
-        normal! g`"
-        return 1
-    endif
-endfunction
-augroup resCur
-    autocmd!
-    autocmd BufWinEnter * call ResCur()
-augroup END
+"function! ResCur()
+"    if line("'\"") <= line("$")
+"        normal! g`"
+"        return 1
+"    endif
+"endfunction
+"augroup resCur
+"    autocmd!
+"    autocmd BufWinEnter * call ResCur()
+"augroup END
 
 " Function to quickly quit vim when we're done with the final buffer
 function! CloseBufferOrQuit(...) abort
