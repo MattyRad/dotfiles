@@ -282,12 +282,12 @@ endif
 " => Turn persistent undo on
 "    means that you can undo even when you close a buffer/VIM
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" note: this is useful in theory, but I actually find that it's harder to remember where I started edits
 "try
 "    set undodir=~/.vim_runtime/temp_dirs/undodir
 "    set undofile
 "catch
 "endtry
-" note: this is useful in theory, but I actually find that it's harder to remember where I stopped
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -387,7 +387,9 @@ endif
 
 call plug#begin('~/.vim/plugged')
     Plug 'VundleVim/Vundle.vim'
-    Plug 'tpope/vim-fugitive'
+    Plug 'tpope/vim-fugitive'                             " git integration tools
+    Plug 'tpope/vim-rhubarb'                              " extends fugitive with github's 'hub' app, worth exploring https://hub.github.com/#developer
+    Plug 'tpope/vim-sleuth'                               " automatic indentation detection
     Plug 'jaxbot/semantic-highlight.vim'                  " highlight distinct words instead of keywords
     Plug 'mg979/vim-visual-multi', {'branch': 'master'}   " multiple cursors like sublime
     Plug 'yegappan/mru'                                   " most recently used files
@@ -413,6 +415,23 @@ call plug#begin('~/.vim/plugged')
     Plug 'scrooloose/nerdtree'                            " nerdtree file tree sidebar
     Plug 'Xuyuanp/nerdtree-git-plugin'                    " show git changes in nerdtree
     Plug 'terryma/vim-expand-region'                      " gradually expand a region in visual mode
+
+    " Languages
+    " html
+    Plug 'hail2u/vim-css3-syntax'
+    Plug 'gko/vim-coloresque'
+    Plug 'tpope/vim-haml'
+    " javascript
+    "Plug 'jelera/vim-javascript-syntax'
+    " php
+    "Plug 'phpactor/phpactor', {'for': 'php', 'do': 'composer install --no-dev -o'}
+    "Plug 'stephpy/vim-php-cs-fixer'
+    " typescript
+    Plug 'leafgarland/typescript-vim'
+    Plug 'HerringtonDarkholme/yats.vim'
+    " vuejs
+    Plug 'posva/vim-vue'
+    Plug 'leafOfTree/vim-vue-plugin'
 call plug#end()
 
 " Completion Engines
@@ -420,7 +439,6 @@ call plug#end()
 ""    Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "endif
 " https://github.com/vim-ctrlspace/vim-ctrlspace
-" https://github.com/prabirshrestha/vim-lsp
 " https://github.com/ervandew/supertab
 " https://github.com/wincent/command-t
 " https://github.com/Shougo/denite.nvim
@@ -429,6 +447,8 @@ call plug#end()
 "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 "Plug 'junegunn/fzf.vim'
 "https://github.com/ncm2/ncm2 (prefer this to below)
+"Plug 'prabirshrestha/async.vim'
+" https://github.com/prabirshrestha/vim-lsp
 "https://github.com/prabirshrestha/asyncomplete.vim
 " https://github.com/liuchengxu/vim-clap
 "Plug 'ctrlpvim/ctrlp.vim'
@@ -438,10 +458,10 @@ call plug#end()
 "Plug 'vim-syntastic/syntastic'                        " language checking tool
 "Plug 'SirVer/ultisnips'
 "Plug 'honza/vim-snippets'
+"php snippets https://github.com/sniphpets
 "
 "
 "
-"Plug 'tpope/vim-sleuth'
 "Plug 'unblevable/quick-scope'
 "Plug 'jeetsukumaran/vim-buffergator'
 "https://github.com/tpope/vim-obsession
@@ -493,6 +513,7 @@ call plug#end()
 " https://github.com/jarun/nnn                          " useful looking file manager, keep it in mind
 
 " I'm not entirely sure what this does (performance boost?), but it comes default in maximum-awesome
+" 'make' doesn't work in android 11 so I'm leaving it out
 "let g:make = 'gmake'
 "if exists('make')
 "        let g:make = 'make'
@@ -590,6 +611,9 @@ let g:airline_theme='bubblegum'
 if filereadable(vimplug_exists)
     let g:airline_section_x = '%{ScrollStatus()}'
 endif
+
+let g:airline#extensions#branch#enabled = 1 " todo
+let g:airline#extensions#ale#enabled = 1 " todo
 
 " Rainbow parenthesis
 let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
