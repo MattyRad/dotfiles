@@ -413,6 +413,13 @@ call plug#begin('~/.vim/plugged')
     Plug 'scrooloose/nerdtree'                            " nerdtree file tree sidebar
     Plug 'Xuyuanp/nerdtree-git-plugin'                    " show git changes in nerdtree
     Plug 'terryma/vim-expand-region'                      " gradually expand a region in visual mode
+
+    " I'm not entirely sure what this does (performance boost?), but it comes default in maximum-awesome
+    let g:make = 'gmake'
+    if exists('make')
+            let g:make = 'make'
+    endif
+    Plug 'Shougo/vimproc.vim', {'do': g:make}
 call plug#end()
 
 " Completion Engines
@@ -453,11 +460,6 @@ call plug#end()
 "Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
 "Plug 'amiorin/vim-project'
 "
-"let g:make = 'gmake'
-"if exists('make')
-"        let g:make = 'make'
-"endif
-"Plug 'Shougo/vimproc.vim', {'do': g:make}
 
 
 " Graveyard
