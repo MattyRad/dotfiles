@@ -539,6 +539,13 @@ endif
 "autocmd VimEnter * wincmd p
 " autoclose if it's the last thing open
 "autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+let g:NERDTreeChDirMode=2
+let g:NERDTreeIgnore=['\.rbc$', '\~$', '\.pyc$', '\.db$', '\.sqlite$', '__pycache__']
+let g:NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$', '\.bak$', '\~$']
+let g:NERDTreeShowBookmarks=1
+let g:nerdtree_tabs_focus_on_files=1
+let g:NERDTreeMapOpenInTabSilent = '<RightMouse>'
+let g:NERDTreeWinSize = 50
 
 """""""""""""""""""""""
 """ START SEMANTIC-HIGHLIGHTING
@@ -576,6 +583,7 @@ let g:rooter_silent_chdir = 1                       " To stop Rooter echoing the
 
 " Airline
 let g:airline#extensions#tabline#enabled = 1
+let g:airline_skip_empty_sections = 1
 let g:airline_theme='bubblegum'
 if filereadable(vimplug_exists)
     let g:airline_section_x = '%{ScrollStatus()}'
@@ -752,3 +760,8 @@ set ttyfast
 
 " https://vim.fandom.com/wiki/Keep_your_cursor_centered_vertically_on_the_screen
 set scrolloff=500
+
+" Search mappings: These will make it so that going to the next one in a
+" search will center on the line it's found in.
+nnoremap n nzzzv
+nnoremap N Nzzzv
