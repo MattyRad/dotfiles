@@ -409,6 +409,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'haya14busa/incsearch.vim'                       " helps get rid of search highlighting after search, no more searching /asdfawegag
     Plug 'joshdick/onedark.vim'                           " color theme
     Plug 'vim-scripts/SearchComplete'                     " autocomplete words while searching
+    Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] } " grep with any grep tool
 
     " harmless plugins: plugins I don't actively use but aren't intrusive and could be useful later
     Plug 'easymotion/vim-easymotion'                      " jump around easily
@@ -418,20 +419,20 @@ call plug#begin('~/.vim/plugged')
 
     " Languages
     " html
-    Plug 'hail2u/vim-css3-syntax'
-    Plug 'gko/vim-coloresque'
-    Plug 'tpope/vim-haml'
+    "Plug 'hail2u/vim-css3-syntax'
+    "Plug 'gko/vim-coloresque'
+    "Plug 'tpope/vim-haml'
     " javascript
     "Plug 'jelera/vim-javascript-syntax'
     " php
     "Plug 'phpactor/phpactor', {'for': 'php', 'do': 'composer install --no-dev -o'}
     "Plug 'stephpy/vim-php-cs-fixer'
     " typescript
-    Plug 'leafgarland/typescript-vim'
-    Plug 'HerringtonDarkholme/yats.vim'
+    "Plug 'leafgarland/typescript-vim'
+    "Plug 'HerringtonDarkholme/yats.vim'
     " vuejs
-    Plug 'posva/vim-vue'
-    Plug 'leafOfTree/vim-vue-plugin'
+    "Plug 'posva/vim-vue'
+    "Plug 'leafOfTree/vim-vue-plugin'
 call plug#end()
 
 " Completion Engines
@@ -467,7 +468,6 @@ call plug#end()
 "https://github.com/tpope/vim-obsession
 "https://github.com/xolox/vim-session
 "Plug 'zefei/vim-colortuner'
-"Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 "Plug 'tpope/vim-surround'
 "Plug 'StanAngeloff/php.vim'
 "Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
@@ -539,6 +539,16 @@ let g:VM_highlight_matches = 'underline'   " some text
 " nvim
 " somehow nvim changes beam cursors to block cursors https://github.com/neovim/neovim/issues/6005
 set guicursor=
+
+" grepper
+nnoremap <leader>g :Grepper -tool rg<cr>
+let g:grepper = { 'jump': 0 }
+let g:grepper.highlight = 1
+let g:grepper.side = 1
+" search in current files
+nnoremap <C-f> :Grepper -tool rg -buffers<cr>
+" under cursor
+"nnoremap <C-S-F> :Grepper -tool ag -cword -noprompt<cr>
 
 " supertab
 let g:SuperTabDefaultCompletionType = "<c-n>"
@@ -791,3 +801,8 @@ set scrolloff=500
 " search will center on the line it's found in.
 nnoremap n nzzzv
 nnoremap N Nzzzv
+
+"" Include a local vim config if provided
+if filereadable(expand("~/.rc.local"))
+  source ~/.rc.local
+endif
