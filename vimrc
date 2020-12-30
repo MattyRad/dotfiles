@@ -439,7 +439,6 @@ call plug#end()
 " https://github.com/autozimu/LanguageClient-neovim
 "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 "Plug 'junegunn/fzf.vim'
-"https://github.com/ncm2/ncm2 (prefer this to below) " requires python3
 "Plug 'prabirshrestha/async.vim'
 " https://github.com/prabirshrestha/vim-lsp
 "https://github.com/prabirshrestha/asyncomplete.vim
@@ -508,6 +507,7 @@ call plug#end()
 " https://jeetsukumaran/vim-buffergator                 " for splitting buffers into panes, it's quite old, keymaps appear to conflict with mine
 " https://github.com/Shougo/deoplete.nvim               " completion engine, returns lots of candidates. requires python 3.6.1, and looks sort of confusing
 " https://github.com/Shougo/denite.nvim                 " fuzzy finder actions through the popup window? confusing, and requires python3
+"https://github.com/ncm2/ncm2 (prefer this to below) " async completion framework, requires python3
 
 " I'm not entirely sure what this does (performance boost?), but it comes default in maximum-awesome
 " 'make' doesn't work in android 11 so I'm leaving it out
@@ -675,10 +675,10 @@ endif
 set mouse=a
 
 " Mappings
-nnoremap r caw
+nnoremap <C-r> caw
 nnoremap <space> i<space>
 "nnoremap <C-f> :Lista<cr>
-vnoremap r <esc>caw
+vnoremap <C-r> <esc>caw
 nnoremap <A-up> :MRU<cr>
 nnoremap <C-w> :call CloseBufferOrQuit()<cr>
 nnoremap <A-down> :call CloseBufferOrQuit()<cr>
@@ -704,8 +704,6 @@ vnoremap <S-down> <down>
 nnoremap <C-c> yy
 nnoremap <C-v> p
 nnoremap <C-x> dd
-nnoremap <C-down> o
-nnoremap <C-up> O
 
 nnoremap <backspace> i<backspace>
 
@@ -729,9 +727,9 @@ nnoremap <C-S-z> r
 vnoremap <C-z> <esc>u
 vnoremap <C-S-z> <esc>r
 
-inoremap <C-s> <esc>:w<cr>
+inoremap <C-s> <esc><esc>:w<cr><esc>
 nnoremap <C-s> :w<cr>
-vnoremap <C-s> <esc>:w<cr>
+vnoremap <C-s> <esc><esc>:w<cr><esc>
 
 nnoremap <tab> i<tab><esc>
 
@@ -749,6 +747,41 @@ vnoremap <C-w> <esc>
 nnoremap <C-A-down> n
 nnoremap <C-A-up> N
 
+" break ALL the rules
+nnoremap <cr> i<cr>
+nnoremap a ia
+nnoremap b ib
+nnoremap c ic
+nnoremap d id
+nnoremap e ie
+nnoremap f if
+nnoremap g ig
+nnoremap h ih
+nnoremap i ii
+nnoremap j ij
+nnoremap k ik
+nnoremap l il
+nnoremap m im
+nnoremap n in
+nnoremap o io
+nnoremap p ip
+nnoremap q iq
+nnoremap r ir
+nnoremap s is
+nnoremap t it
+nnoremap u iu
+nnoremap v iv
+nnoremap w iw
+nnoremap x ix
+nnoremap y iy
+nnoremap z iz
+
+nnoremap <end> $l
+nnoremap <home> ^
+" graveyard
+"nnoremap <C-down> o
+"nnoremap <C-up> O
+
 " Tabbing
 set smartindent
 set cindent
@@ -762,8 +795,6 @@ let loaded_matchparen = 1
 set synmaxcol=200
 
 set ve+=onemore                        " where have you been all my life https://superuser.com/questions/918500/how-to-set-cursor-to-after-last-character-in-vim
-nnoremap <end> $li
-nnoremap <home> ^i
 
 " Record last position of cursor
 "function! ResCur()
