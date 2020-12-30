@@ -436,24 +436,13 @@ call plug#begin('~/.vim/plugged')
 call plug#end()
 
 " Completion Engines
-"if executable('node')
-""    Plug 'neoclide/coc.nvim', {'branch': 'release'}
-"endif
-" https://github.com/vim-ctrlspace/vim-ctrlspace
-" https://github.com/ervandew/supertab
-" https://github.com/wincent/command-t
-" https://github.com/Shougo/denite.nvim
 " https://github.com/autozimu/LanguageClient-neovim
-" https://github.com/Shougo/deoplete.nvim
 "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 "Plug 'junegunn/fzf.vim'
-"https://github.com/ncm2/ncm2 (prefer this to below)
+"https://github.com/ncm2/ncm2 (prefer this to below) " requires python3
 "Plug 'prabirshrestha/async.vim'
 " https://github.com/prabirshrestha/vim-lsp
 "https://github.com/prabirshrestha/asyncomplete.vim
-" https://github.com/liuchengxu/vim-clap
-"Plug 'ctrlpvim/ctrlp.vim'
-" https://github.com/yangyangwithgnu/use_vim_as_ide
 " https://github.com/dense-analysis/ale
 "Plug 'lifepillar/vim-mucomplete' " minimalist
 "Plug 'vim-syntastic/syntastic'                        " language checking tool
@@ -464,7 +453,6 @@ call plug#end()
 "
 "
 "Plug 'unblevable/quick-scope'
-"Plug 'jeetsukumaran/vim-buffergator'
 "https://github.com/tpope/vim-obsession
 "https://github.com/xolox/vim-session
 "Plug 'zefei/vim-colortuner'
@@ -474,9 +462,14 @@ call plug#end()
 "Plug 'amiorin/vim-project'
 "
 
+" On the fence:
+"Plug 'vim-ctrlspace/vim-ctrlspace'                     " handles projects and working directories, looks handy, but has an annoying learning curve
+"Plug 'ctrlpvim/ctrlp.vim' " not as actively maintained as denite? unite/denite touts that it is better
+" https://github.com/liuchengxu/vim-clap " sounds impressive, new and built with rust, but requires patch-8.1.2114 or neovim
+"Plug 'neoclide/coc.nvim', {'branch': 'release'} " this one is really great, but requiring node 10.12 is such a pain, check other plugins first
 
 " Graveyard
-" https://github.com/Yggdroot/indentLine'               " show indentation levels, kind of nice
+" https://github.com/Yggdroot/indentLine                " show indentation levels, kind of nice
 " https://github.com/square/maximum-awesome             " vimrc, pretty old
 " https://github.com/lornix/vim-scrollbar'              " scrollbar that doesn't appear to work exactly right
 " https://github.com/Zarainia/vim-scrollbar'            " similar to lornix/vim-scrollbar
@@ -511,6 +504,10 @@ call plug#end()
 " https://github.com/junegunn/vim-easy-align            " similar to tabular
 " https://github.com/mhinz/vim-galore                   " comprehensive vim guide
 " https://github.com/jarun/nnn                          " useful looking file manager, keep it in mind
+" https://github.com/wincent/command-t                  " requires vim compiled with ruby
+" https://jeetsukumaran/vim-buffergator                 " for splitting buffers into panes, it's quite old, keymaps appear to conflict with mine
+" https://github.com/Shougo/deoplete.nvim               " completion engine, returns lots of candidates. requires python 3.6.1, and looks sort of confusing
+" https://github.com/Shougo/denite.nvim                 " fuzzy finder actions through the popup window? confusing, and requires python3
 
 " I'm not entirely sure what this does (performance boost?), but it comes default in maximum-awesome
 " 'make' doesn't work in android 11 so I'm leaving it out
@@ -551,7 +548,8 @@ let g:grepper.side = 1
 "nnoremap <C-S-f> :Grepper -tool ag -cword -noprompt<cr>
 
 " supertab
-let g:SuperTabDefaultCompletionType = "<c-n>"
+"let g:SuperTabDefaultCompletionType = "<c-n>"
+let g:SuperTabContextDefaultCompletionType = "<c-n>"
 
 "" Copy/Paste/Cut
 " copy/paste - https://unix.stackexchange.com/questions/12535/how-to-copy-text-from-vim-to-an-external-program
