@@ -546,9 +546,9 @@ let g:grepper = { 'jump': 0 }
 let g:grepper.highlight = 1
 let g:grepper.side = 1
 " search in current files
-nnoremap <C-f> :Grepper -tool rg -buffers<cr>
+"nnoremap <C-f> :Grepper -tool rg -buffers<cr>
 " under cursor
-"nnoremap <C-S-F> :Grepper -tool ag -cword -noprompt<cr>
+"nnoremap <C-S-f> :Grepper -tool ag -cword -noprompt<cr>
 
 " supertab
 let g:SuperTabDefaultCompletionType = "<c-n>"
@@ -709,6 +709,8 @@ nnoremap <C-x> dd
 nnoremap <C-down> o
 nnoremap <C-up> O
 
+nnoremap <backspace> i<backspace>
+
 inoremap <C-down> <esc>oi
 inoremap <C-up> <esc>Oi
 
@@ -743,6 +745,11 @@ nnoremap <C-right> e<right>
 
 inoremap <C-left> <esc>b
 inoremap <C-right> <esc>e<right>
+
+vnoremap <C-w> <esc>
+
+nnoremap <C-A-down> n
+nnoremap <C-A-up> N
 
 " Tabbing
 set smartindent
@@ -806,3 +813,6 @@ nnoremap N Nzzzv
 if filereadable(expand("~/.rc.local"))
   source ~/.rc.local
 endif
+
+" make the search highlighting less insufferable
+autocmd VimEnter * highlight Search ctermbg=none ctermfg=yellow term=underline
