@@ -404,7 +404,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'Raimondi/delimitMate'                           " matching delimiters
     Plug 'ryanoasis/vim-devicons'                         " icons in buffers etc
     Plug 'lambdalisue/lista.nvim'                         " line filtering per file
-    Plug 'psliwka/vim-smoothie'                           " smooth scrolling in page-up/down
+    Plug 'joeytwiddle/sexy_scroller.vim'                  " smooth scrolling
     Plug 'ojroques/vim-scrollstatus'                      " add scrollbar to statusline (vim-airline)
     Plug 'haya14busa/incsearch.vim'                       " helps get rid of search highlighting after search, no more searching /asdfawegag
     Plug 'joshdick/onedark.vim'                           " color theme
@@ -507,7 +507,8 @@ call plug#end()
 " https://jeetsukumaran/vim-buffergator                 " for splitting buffers into panes, it's quite old, keymaps appear to conflict with mine
 " https://github.com/Shougo/deoplete.nvim               " completion engine, returns lots of candidates. requires python 3.6.1, and looks sort of confusing
 " https://github.com/Shougo/denite.nvim                 " fuzzy finder actions through the popup window? confusing, and requires python3
-"https://github.com/ncm2/ncm2 (prefer this to below) " async completion framework, requires python3
+" https://github.com/ncm2/ncm2 (prefer this to below)   " async completion framework, requires python3
+" https://github.com/psliwka/vim-smoothie               " really good, but sexy_scroller is snappier and supports more things out of the box
 
 " I'm not entirely sure what this does (performance boost?), but it comes default in maximum-awesome
 " 'make' doesn't work in android 11 so I'm leaving it out
@@ -643,6 +644,11 @@ map #  <Plug>(incsearch-nohl-#)
 map g* <Plug>(incsearch-nohl-g*)
 map g# <Plug>(incsearch-nohl-g#)
 
+" sexy scroller
+" make mouse scrolling not as slow
+let g:SexyScroller_MinLines = 50
+let g:SexyScroller_MinColumns = 200
+
 " CoC
 " https://github.com/neoclide/coc.nvim
 let g:coc_disable_startup_warning = 1
@@ -697,6 +703,7 @@ vnoremap <C-S-down> :m '>+1<CR>gv=gv
 vnoremap <C-S-up> :m '<-2<CR>gv=gv
 nnoremap <C-S-left> vb
 nnoremap <C-S-right> vw
+vnoremap <C-S-right> E<right>
 nnoremap <S-up> v<up>
 nnoremap <S-down> v<down>
 vnoremap <S-up> <up>
@@ -722,14 +729,16 @@ vnoremap <C-p> <esc>p
 inoremap <C-v> <esc>pi
 
 nnoremap <C-z> u
-nnoremap <C-S-z> r
+inoremap <C-z> <esc>:undo<cr>i
+nnoremap <C-r> :redo<cr>
+"nnoremap <C-S-z> r "why isn't shift being recognized for certain keys?!
 
 vnoremap <C-z> <esc>u
 vnoremap <C-S-z> <esc>r
 
-inoremap <C-s> <esc><esc>:w<cr><esc>
+inoremap <C-s> <esc><esc>:w<cr><esc><esc>
 nnoremap <C-s> :w<cr>
-vnoremap <C-s> <esc><esc>:w<cr><esc>
+vnoremap <C-s> <esc><esc>:w<cr><esc><esc>
 
 nnoremap <tab> i<tab><esc>
 
@@ -775,6 +784,9 @@ nnoremap w iw
 nnoremap x ix
 nnoremap y iy
 nnoremap z iz
+nnoremap " i"
+nnoremap < i<
+nnoremap > i>
 
 nnoremap <end> $l
 nnoremap <home> ^
@@ -826,6 +838,8 @@ endfunction
 set noshowmode  " to get rid of thing like --INSERT--
 set noshowcmd  " to get rid of display of last command
 set shortmess+=F  " to get rid of the file name displayed in the command line bar
+
+set cursorline
 
 " https://stackoverflow.com/questions/307148/vim-scrolling-slowly
 set ttyfast
