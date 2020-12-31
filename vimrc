@@ -455,10 +455,10 @@ call plug#end()
 "https://github.com/tpope/vim-obsession
 "https://github.com/xolox/vim-session
 "Plug 'zefei/vim-colortuner'
-"Plug 'tpope/vim-surround'
 "Plug 'StanAngeloff/php.vim'
 "Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
 "Plug 'amiorin/vim-project'
+"Plug 'tpope/vim-surround'
 "
 
 " On the fence:
@@ -702,7 +702,7 @@ nnoremap <C-S-down> :m +1<cr>
 vnoremap <C-S-down> :m '>+1<CR>gv=gv
 vnoremap <C-S-up> :m '<-2<CR>gv=gv
 nnoremap <C-S-left> vb
-nnoremap <C-S-right> vw
+nnoremap <C-S-right> ve<right>
 vnoremap <C-S-right> E<right>
 nnoremap <S-up> v<up>
 nnoremap <S-down> v<down>
@@ -787,6 +787,12 @@ nnoremap z iz
 nnoremap " i"
 nnoremap < i<
 nnoremap > i>
+nnoremap ; i;
+nnoremap ' i'
+
+" seems insane to have to have a command like this to quote some text in visual mode, but it works
+" https://superuser.com/questions/782391/vim-enclose-in-quotes
+vnoremap ' :s/\%V\(.*\)\%V/'\1'/<cr>
 
 nnoremap <end> $l
 nnoremap <home> ^
@@ -859,3 +865,4 @@ endif
 
 " make the search highlighting less insufferable
 autocmd VimEnter * highlight Search ctermbg=none ctermfg=yellow term=underline
+
