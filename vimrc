@@ -400,7 +400,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'luochen1990/rainbow'                            " Highlight matching parents different colors
     Plug 'airblade/vim-rooter'                            " Set project root to current file
     Plug 'sheerun/vim-polyglot'                           " language packs
-    "Plug 'ervandew/supertab'                              " tag completion
+    Plug 'ervandew/supertab'                              " tag completion
     Plug 'Raimondi/delimitMate'                           " matching delimiters
     Plug 'ryanoasis/vim-devicons'                         " icons in buffers etc
     Plug 'lambdalisue/lista.nvim'                         " line filtering per file
@@ -411,7 +411,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'vim-scripts/SearchComplete'                     " autocomplete words while searching
     "Plug 'TaDaa/vimade'                                   " increase opacity of non-focused buffers
     Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] } " grep with any grep tool
-    Plug 'creativenull/ale'                               " language server and completion tool, this is a fork of dense-analysis/ale
+    Plug 'creativenull/ale'                               " language server integration tool, this is a fork of dense-analysis/ale
 
     " harmless plugins: plugins I don't actively use but aren't intrusive and could be useful later
     Plug 'easymotion/vim-easymotion'                      " jump around easily
@@ -550,11 +550,12 @@ let g:grepper.side = 1
 "nnoremap <C-S-f> :Grepper -tool ag -cword -noprompt<cr>
 
 " ale
-let g:ale_completion_enabled = 1
-set omnifunc=ale#completion#OmniFunc
+"let g:ale_completion_enabled = 1
+"set omnifunc=ale#completion#OmniFunc
 " https://stackoverflow.com/questions/50473043/how-do-you-use-tab-to-cycle-through-completion-suggestions-with-ale
-inoremap <silent><expr> <Tab>
-      \ pumvisible() ? "\<C-n>" : "\<TAB>"
+"inoremap <silent><expr> <Tab>
+"      \ pumvisible() ? "\<C-n>" : "\<TAB>"
+nnoremap <C-]> :ALEGoToDefinition<cr>
 
 " supertab
 "let g:SuperTabDefaultCompletionType = "<c-n>"
@@ -634,9 +635,8 @@ let g:airline_theme='bubblegum'
 if filereadable(vimplug_exists)
     let g:airline_section_x = '%{ScrollStatus()}'
 endif
-
-let g:airline#extensions#branch#enabled = 1 " todo
-let g:airline#extensions#ale#enabled = 1 " todo
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#ale#enabled = 1
 
 " Rainbow parenthesis
 let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
@@ -696,17 +696,18 @@ set mouse=a
 
 " Mappings
 nnoremap <C-r> caw
-nnoremap <space> i<space>
-"nnoremap <C-f> :Lista<cr>
+inoremap rr <esc>caw
+nnoremap <C-f> /
 vnoremap <C-r> <esc>caw
 nnoremap <A-up> :MRU<cr>
 nnoremap <C-w> :call CloseBufferOrQuit()<cr>
 nnoremap <A-down> :call CloseBufferOrQuit()<cr>
 nnoremap <C-x> dd
-inoremap rr <esc>caw
+"nnoremap <C-backspace> caw
+"inoremap <C-backspace> <esc>cawi
 " phone help
-nnoremap hh ^ii
-nnoremap ll A
+nnoremap <C-h> ^i
+nnoremap <C-l> A
 " Buffers
 nnoremap <A-left> :bp<cr>
 nnoremap <A-right> :bn<cr>
@@ -771,6 +772,7 @@ nnoremap <C-A-down> n
 nnoremap <C-A-up> N
 
 " break ALL the rules
+nnoremap <space> i<space>
 nnoremap <cr> i<cr>
 nnoremap a ia
 nnoremap b ib
