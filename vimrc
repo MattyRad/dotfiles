@@ -409,7 +409,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'haya14busa/incsearch.vim'                       " helps get rid of search highlighting after search, no more searching /asdfawegag
     Plug 'joshdick/onedark.vim'                           " color theme
     Plug 'vim-scripts/SearchComplete'                     " autocomplete words while searching
-    Plug 'TaDaa/vimade'                                   " increase opacity of non-focused buffers
+    "Plug 'TaDaa/vimade'                                   " increase opacity of non-focused buffers
     Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] } " grep with any grep tool
 
     " harmless plugins: plugins I don't actively use but aren't intrusive and could be useful later
