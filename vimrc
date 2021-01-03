@@ -400,7 +400,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'luochen1990/rainbow'                            " Highlight matching parents different colors
     Plug 'airblade/vim-rooter'                            " Set project root to current file
     Plug 'sheerun/vim-polyglot'                           " language packs
-    Plug 'ervandew/supertab'                              " tag completion
+    "Plug 'ervandew/supertab'                              " tag completion
     Plug 'Raimondi/delimitMate'                           " matching delimiters
     Plug 'ryanoasis/vim-devicons'                         " icons in buffers etc
     Plug 'lambdalisue/lista.nvim'                         " line filtering per file
@@ -411,6 +411,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'vim-scripts/SearchComplete'                     " autocomplete words while searching
     "Plug 'TaDaa/vimade'                                   " increase opacity of non-focused buffers
     Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] } " grep with any grep tool
+    Plug 'creativenull/ale'                               " language server and completion tool, this is a fork of dense-analysis/ale
 
     " harmless plugins: plugins I don't actively use but aren't intrusive and could be useful later
     Plug 'easymotion/vim-easymotion'                      " jump around easily
@@ -443,7 +444,6 @@ call plug#end()
 "Plug 'prabirshrestha/async.vim'
 " https://github.com/prabirshrestha/vim-lsp
 "https://github.com/prabirshrestha/asyncomplete.vim
-" https://github.com/dense-analysis/ale
 "Plug 'lifepillar/vim-mucomplete' " minimalist
 "Plug 'vim-syntastic/syntastic'                        " language checking tool
 "Plug 'SirVer/ultisnips'
@@ -549,6 +549,13 @@ let g:grepper.side = 1
 " under cursor
 "nnoremap <C-S-f> :Grepper -tool ag -cword -noprompt<cr>
 
+" ale
+let g:ale_completion_enabled = 1
+set omnifunc=ale#completion#OmniFunc
+" https://stackoverflow.com/questions/50473043/how-do-you-use-tab-to-cycle-through-completion-suggestions-with-ale
+inoremap <silent><expr> <Tab>
+      \ pumvisible() ? "\<C-n>" : "\<TAB>"
+
 " supertab
 "let g:SuperTabDefaultCompletionType = "<c-n>"
 let g:SuperTabContextDefaultCompletionType = "<c-n>"
@@ -571,14 +578,19 @@ endif
 " Go to previous (last accessed) window.
 "autocmd VimEnter * wincmd p
 " autoclose if it's the last thing open
-"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-let g:NERDTreeChDirMode=2
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+"https://stackoverflow.com/questions/8584182/how-to-refresh-in-nerdtree-plugin
+"autocmd bufenter * call g:NERDTree.ForCurrentTab().getRoot().refresh() | call g:NERDTree.ForCurrentTab().render() | wincmd w
+" https://superuser.com/questions/195022/vim-how-to-synchronize-nerdtree-with-current-opened-tab-file-path
+"autocmd BufEnter * lcd %:p:h
+"autocmd BufEnter * if &modifiable | NERDTreeCWD | wincmd p | endif
+"let g:NERDTreeChDirMode=2
 let g:NERDTreeIgnore=['\.rbc$', '\~$', '\.pyc$', '\.db$', '\.sqlite$', '__pycache__']
 let g:NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$', '\.bak$', '\~$']
 let g:NERDTreeShowBookmarks=1
 let g:nerdtree_tabs_focus_on_files=1
 let g:NERDTreeMapOpenInTabSilent = '<RightMouse>'
-let g:NERDTreeWinSize = 50
+let g:NERDTreeWinSize = 30
 
 """""""""""""""""""""""
 """ START SEMANTIC-HIGHLIGHTING
@@ -613,6 +625,7 @@ autocmd BufWritePre * %s/\s\+$//e       " trim trailing whitespace
 
 " Rooter
 let g:rooter_silent_chdir = 1                       " To stop Rooter echoing the project directory
+"let g:rooter_patterns = ['.git']
 
 " Airline
 let g:airline#extensions#tabline#enabled = 1
