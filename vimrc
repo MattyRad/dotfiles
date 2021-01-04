@@ -593,6 +593,9 @@ let g:nerdtree_tabs_focus_on_files=1
 let g:NERDTreeMapOpenInTabSilent = '<RightMouse>'
 let g:NERDTreeWinSize = 30
 
+" https://vi.stackexchange.com/questions/3072/how-can-i-bind-ctrl-space-to-be-esc-when-not-in-insert-mode-and-to-switch-to-in
+nnoremap <C-@> :NERDTreeToggle \| pwd<cr>
+
 """""""""""""""""""""""
 """ START SEMANTIC-HIGHLIGHTING
 """""""""""""""""""""""
