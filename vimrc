@@ -510,6 +510,7 @@ call plug#end()
 " https://github.com/Shougo/denite.nvim                 " fuzzy finder actions through the popup window? confusing, and requires python3
 " https://github.com/ncm2/ncm2 (prefer this to below)   " async completion framework, requires python3
 " https://github.com/psliwka/vim-smoothie               " really good, but sexy_scroller is snappier and supports more things out of the box
+" https://github.com/voldikss/vim-floaterm              " start a floating terminal. not super appealling to me, and transforms my beam cursor to a block cursor
 
 " I'm not entirely sure what this does (performance boost?), but it comes default in maximum-awesome
 " 'make' doesn't work in android 11 so I'm leaving it out
@@ -695,14 +696,15 @@ endif
 set mouse=a
 
 " Mappings
-nnoremap <C-r> caw
+nnoremap rr caw
 inoremap rr <esc>caw
 nnoremap <C-f> /
-vnoremap <C-r> <esc>caw
 nnoremap <A-up> :MRU<cr>
 nnoremap <C-w> :call CloseBufferOrQuit()<cr>
 nnoremap <A-down> :call CloseBufferOrQuit()<cr>
 nnoremap <C-x> dd
+"nnoremap <C-r> caw
+"vnoremap <C-r> <esc>caw
 "nnoremap <C-backspace> caw
 "inoremap <C-backspace> <esc>cawi
 " phone help
@@ -713,12 +715,14 @@ nnoremap <A-left> :bp<cr>
 nnoremap <A-right> :bn<cr>
 " grab and shift lines like sublime
 nnoremap <C-S-up> :m -2<cr>
+inoremap <C-S-up> <esc>:m -2<cr>
 nnoremap <C-S-down> :m +1<cr>
+inoremap <C-S-down> <esc>:m +1<cr>
 vnoremap <C-S-down> :m '>+1<CR>gv=gv
 vnoremap <C-S-up> :m '<-2<CR>gv=gv
 nnoremap <C-S-left> vb
 nnoremap <C-S-right> ve<right>
-vnoremap <C-S-right> E<right>
+vnoremap <C-S-right> E
 nnoremap <S-up> v<up>
 nnoremap <S-down> v<down>
 vnoremap <S-up> <up>
@@ -770,6 +774,9 @@ vnoremap <C-w> <esc>
 
 nnoremap <C-A-down> n
 nnoremap <C-A-up> N
+
+inoremap <C-S-left> <esc><C-S-left>
+inoremap <C-S-right> <esc><C-S-right>
 
 " break ALL the rules
 nnoremap <space> i<space>
