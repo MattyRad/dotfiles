@@ -408,7 +408,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'ojroques/vim-scrollstatus'                      " add scrollbar to statusline (vim-airline)
     Plug 'haya14busa/incsearch.vim'                       " helps get rid of search highlighting after search, no more searching /asdfawegag
     Plug 'joshdick/onedark.vim'                           " color theme
-    Plug 'vim-scripts/SearchComplete'                     " autocomplete words while searching
+    Plug 'osyo-manga/vim-anzu'                            " search counts
     "Plug 'TaDaa/vimade'                                   " increase opacity of non-focused buffers
     Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] } " grep with any grep tool
     Plug 'creativenull/ale'                               " language server integration tool, this is a fork of dense-analysis/ale
@@ -469,6 +469,7 @@ call plug#end()
 "Plug 'neoclide/coc.nvim', {'branch': 'release'} " this one is really great, but requiring node 10.12 is such a pain, check other plugins first
 
 " Graveyard
+" https://github.com/vim-scripts/SearchComplete         " autocomplete words while searching. it's nice but it break /<up>
 " https://github.com/Yggdroot/indentLine                " show indentation levels, kind of nice
 " https://github.com/square/maximum-awesome             " vimrc, pretty old
 " https://github.com/lornix/vim-scrollbar'              " scrollbar that doesn't appear to work exactly right
@@ -637,19 +638,20 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_skip_empty_sections = 1
 let g:airline_theme='bubblegum'
 if filereadable(vimplug_exists)
-    let g:airline_section_x = '%{ScrollStatus()}'
+    let g:airline_section_x = '%{anzu#search_status()} %{ScrollStatus()}'
 endif
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#ale#enabled = 1
+let g:airline#extensions#searchcount#enabled = 1
 
 " Rainbow parenthesis
 let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
 
 " Lista
-let g:lista#custom_mappings = [
-      \ ['<up>', '<lista:select_previous_candidate>', 'noremap'],
-      \ ['<down>', '<lista:select_next_candidate>', 'noremap'],
-      \]
+"let g:lista#custom_mappings = [
+"      \ ['<up>', '<lista:select_previous_candidate>', 'noremap'],
+"      \ ['<down>', '<lista:select_next_candidate>', 'noremap'],
+"      \]
 
 
 set signcolumn=yes " always show git gutter to prevent weird shifting
@@ -734,6 +736,13 @@ nnoremap <C-c> yy
 nnoremap <C-v> p
 nnoremap <C-x> dd
 
+vnoremap <S-left> <left>
+vnoremap <S-right> <right>
+vnoremap <right> <esc><right>
+vnoremap <left> <esc><left>
+nnoremap <S-right> v<right>
+nnoremap <S-left> v<left>
+
 nnoremap <backspace> i<backspace>
 
 inoremap <C-down> <esc>oi
@@ -815,6 +824,8 @@ nnoremap < i<
 nnoremap > i>
 nnoremap ; i;
 nnoremap ' i'
+
+nnoremap * i*
 
 " https://superuser.com/questions/782391/vim-enclose-in-quotes
 vnoremap ' :s/\%V\(.*\)\%V/'\1'/<cr>
