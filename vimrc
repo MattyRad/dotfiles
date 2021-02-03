@@ -740,6 +740,8 @@ vnoremap <S-left> <left>
 vnoremap <S-right> <right>
 vnoremap <right> <esc><right>
 vnoremap <left> <esc><left>
+vnoremap <up> <esc><up>
+vnoremap <down> <esc><down>
 nnoremap <S-right> v<right>
 nnoremap <S-left> v<left>
 
@@ -783,6 +785,7 @@ inoremap <C-left> <esc>b
 inoremap <C-right> <esc>e<right>
 
 vnoremap <C-w> <esc>
+inoremap <C-w> <esc>
 
 nnoremap <C-A-down> n
 nnoremap <C-A-up> N
@@ -826,6 +829,7 @@ nnoremap ; i;
 nnoremap ' i'
 
 nnoremap * i*
+nnoremap , i,
 
 " https://superuser.com/questions/782391/vim-enclose-in-quotes
 vnoremap ' :s/\%V\(.*\)\%V/'\1'/<cr>
