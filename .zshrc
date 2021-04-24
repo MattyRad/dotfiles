@@ -1,6 +1,14 @@
 
+plugins=(
+    git
+    zsh-syntax-highlighting
+    zsh-autosuggestions
+    artisan
+)
+
 # Stock
-alias v="vim"
+alias m="micro"
+alias v="micro"
 alias s="sudo"
 alias sv="sudo vim"
 alias x="exit"
