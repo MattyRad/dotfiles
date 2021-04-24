@@ -1,7 +1,7 @@
 
 # Stock
-alias m="micro"
-alias v="micro"
+alias m="micro -clipboard terminal"
+alias v="micro -clipboard terminal"
 alias s="subl"
 alias sv="sudo vim"
 alias x="exit"
