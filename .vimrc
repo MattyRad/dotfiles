@@ -719,117 +719,117 @@ nnoremap <C-l> A
 nnoremap <A-left> :bp<cr>
 nnoremap <A-right> :bn<cr>
 " grab and shift lines like sublime
-nnoremap <C-S-up> :m -2<cr>
-inoremap <C-S-up> <esc>:m -2<cr>
-nnoremap <C-S-down> :m +1<cr>
-inoremap <C-S-down> <esc>:m +1<cr>
-vnoremap <C-S-down> :m '>+1<CR>gv=gv
-vnoremap <C-S-up> :m '<-2<CR>gv=gv
-nnoremap <C-S-left> vb
-nnoremap <C-S-right> ve<right>
-vnoremap <C-S-right> E
-nnoremap <S-up> v<up>
-nnoremap <S-down> v<down>
-vnoremap <S-up> <up>
-vnoremap <S-down> <down>
-nnoremap <C-c> yy
-nnoremap <C-v> p
-nnoremap <C-x> dd
-
-vnoremap <S-left> <left>
-vnoremap <S-right> <right>
-vnoremap <right> <esc><right>
-vnoremap <left> <esc><left>
-vnoremap <up> <esc><up>
-vnoremap <down> <esc><down>
-nnoremap <S-right> v<right>
-nnoremap <S-left> v<left>
-
-nnoremap <backspace> i<backspace>
-
-inoremap <C-down> <esc>oi
-inoremap <C-up> <esc>Oi
-
-inoremap <C-x> <esc>ddi
-inoremap <C-v> <esc>pi
-
-nnoremap <S-home> v<S-home>
-nnoremap <S-end> v<S-end><left>
-
-vnoremap <C-x> di
-vnoremap <C-p> <esc>p
-
-inoremap <C-v> <esc>pi
-
-nnoremap <C-z> u
-inoremap <C-z> <esc>:undo<cr>i
-nnoremap <C-r> :redo<cr>
-"nnoremap <C-S-z> r "why isn't shift being recognized for certain keys?!
-
-vnoremap <C-z> <esc>u
-vnoremap <C-S-z> <esc>r
-
-inoremap <C-s> <esc><esc>:w<cr><esc><esc>
-nnoremap <C-s> :w<cr>
-vnoremap <C-s> <esc><esc>:w<cr><esc><esc>
-
-nnoremap <tab> i<tab><esc>
-
-inoremap <C-q> <esc>
-vnoremap <C-q> <esc>
-
-nnoremap <C-left> b
-nnoremap <C-right> e<right>
-
-inoremap <C-left> <esc>b
-inoremap <C-right> <esc>e<right>
-
-vnoremap <C-w> <esc>
-inoremap <C-w> <esc>
-
-nnoremap <C-A-down> n
-nnoremap <C-A-up> N
-
-inoremap <C-S-left> <esc><C-S-left>
-inoremap <C-S-right> <esc><C-S-right>
-
-" break ALL the rules
-nnoremap <space> i<space>
-nnoremap <cr> i<cr>
-nnoremap a ia
-nnoremap b ib
-nnoremap c ic
-nnoremap d id
-nnoremap e ie
-nnoremap f if
-nnoremap g ig
-nnoremap h ih
-nnoremap i ii
-nnoremap j ij
-nnoremap k ik
-nnoremap l il
-nnoremap m im
-nnoremap n in
-nnoremap o io
-nnoremap p ip
-nnoremap q iq
-nnoremap r ir
-nnoremap s is
-nnoremap t it
-nnoremap u iu
-nnoremap v iv
-nnoremap w iw
-nnoremap x ix
-nnoremap y iy
-nnoremap z iz
-nnoremap " i"
-nnoremap < i<
-nnoremap > i>
-nnoremap ; i;
-nnoremap ' i'
-
-nnoremap * i*
-nnoremap , i,
+"nnoremap <C-S-up> :m -2<cr>
+"inoremap <C-S-up> <esc>:m -2<cr>
+"nnoremap <C-S-down> :m +1<cr>
+"inoremap <C-S-down> <esc>:m +1<cr>
+"vnoremap <C-S-down> :m '>+1<CR>gv=gv
+"vnoremap <C-S-up> :m '<-2<CR>gv=gv
+"nnoremap <C-S-left> vb
+"nnoremap <C-S-right> ve<right>
+"vnoremap <C-S-right> E
+"nnoremap <S-up> v<up>
+"nnoremap <S-down> v<down>
+"vnoremap <S-up> <up>
+"vnoremap <S-down> <down>
+"nnoremap <C-c> yy
+"nnoremap <C-v> p
+"nnoremap <C-x> dd
+"
+"vnoremap <S-left> <left>
+"vnoremap <S-right> <right>
+"vnoremap <right> <esc><right>
+"vnoremap <left> <esc><left>
+"vnoremap <up> <esc><up>
+"vnoremap <down> <esc><down>
+"nnoremap <S-right> v<right>
+"nnoremap <S-left> v<left>
+"
+"nnoremap <backspace> i<backspace>
+"
+"inoremap <C-down> <esc>oi
+"inoremap <C-up> <esc>Oi
+"
+"inoremap <C-x> <esc>ddi
+"inoremap <C-v> <esc>pi
+"
+"nnoremap <S-home> v<S-home>
+"nnoremap <S-end> v<S-end><left>
+"
+"vnoremap <C-x> di
+"vnoremap <C-p> <esc>p
+"
+"inoremap <C-v> <esc>pi
+"
+"nnoremap <C-z> u
+"inoremap <C-z> <esc>:undo<cr>i
+"nnoremap <C-r> :redo<cr>
+""nnoremap <C-S-z> r "why isn't shift being recognized for certain keys?!
+"
+"vnoremap <C-z> <esc>u
+"vnoremap <C-S-z> <esc>r
+"
+"inoremap <C-s> <esc><esc>:w<cr><esc><esc>
+"nnoremap <C-s> :w<cr>
+"vnoremap <C-s> <esc><esc>:w<cr><esc><esc>
+"
+"nnoremap <tab> i<tab><esc>
+"
+"inoremap <C-q> <esc>
+"vnoremap <C-q> <esc>
+"
+"nnoremap <C-left> b
+"nnoremap <C-right> e<right>
+"
+"inoremap <C-left> <esc>b
+"inoremap <C-right> <esc>e<right>
+"
+"vnoremap <C-w> <esc>
+"inoremap <C-w> <esc>
+"
+"nnoremap <C-A-down> n
+"nnoremap <C-A-up> N
+"
+"inoremap <C-S-left> <esc><C-S-left>
+"inoremap <C-S-right> <esc><C-S-right>
+"
+"" break ALL the rules
+"nnoremap <space> i<space>
+"nnoremap <cr> i<cr>
+"nnoremap a ia
+"nnoremap b ib
+"nnoremap c ic
+"nnoremap d id
+"nnoremap e ie
+"nnoremap f if
+"nnoremap g ig
+"nnoremap h ih
+"nnoremap i ii
+"nnoremap j ij
+"nnoremap k ik
+"nnoremap l il
+"nnoremap m im
+"nnoremap n in
+"nnoremap o io
+"nnoremap p ip
+"nnoremap q iq
+"nnoremap r ir
+"nnoremap s is
+"nnoremap t it
+"nnoremap u iu
+"nnoremap v iv
+"nnoremap w iw
+"nnoremap x ix
+"nnoremap y iy
+"nnoremap z iz
+"nnoremap " i"
+"nnoremap < i<
+"nnoremap > i>
+"nnoremap ; i;
+"nnoremap ' i'
+"
+"nnoremap * i*
+"nnoremap , i,
 
 " https://superuser.com/questions/782391/vim-enclose-in-quotes
 vnoremap ' :s/\%V\(.*\)\%V/'\1'/<cr>
