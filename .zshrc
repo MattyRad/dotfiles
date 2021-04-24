@@ -19,6 +19,9 @@ alias cp="cp -iv"
 alias mkdir="mkdir -vp"
 alias f="find ./ -name"
 
+# SSH
+alias ssh="ssh -Y"
+
 # Rust tools
 alias r="rg --no-ignore"
 alias search="fd --no-ignore --hidden"
