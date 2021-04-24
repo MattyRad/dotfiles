@@ -1,11 +1,4 @@
 
-plugins=(
-    git
-    zsh-syntax-highlighting
-    zsh-autosuggestions
-    artisan
-)
-
 # Stock
 alias m="micro"
 alias v="micro"
