@@ -20,7 +20,7 @@ alias mkdir="mkdir -vp"
 alias f="find ./ -name"
 
 # SSH
-alias ssh="ssh -Y"
+alias sshc="ssh -Y"
 
 # Rust tools
 alias r="rg --no-ignore"
