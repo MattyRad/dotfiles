@@ -2,7 +2,7 @@
 # Stock
 alias m="micro"
 alias v="micro"
-alias s="sudo"
+alias s="subl"
 alias sv="sudo vim"
 alias x="exit"
 alias ra="sudo service apache2 restart"
