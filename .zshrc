@@ -5,7 +5,6 @@ alias s="sudo"
 alias sv="sudo vim"
 alias x="exit"
 alias ra="sudo service apache2 restart"
-alias z="v ~/.zshrc"
 alias targz="tar xvzf"
 alias mv="mv -iv"
 alias cp="cp -iv"
@@ -28,11 +27,9 @@ alias install="sudo apt-get install -y"
 alias ci="composer install -vvv"
 alias cu="composer update -vvv"
 alias pa="php artisan"
-alias difflock="~/.config/composer/vendor/bin/composer-lock-diff --md --from develop"
-
-## Tools
 alias stan="./vendor/bin/phpstan analyse"
 alias unit="./vendor/bin/phpunit"
+alias difflock="~/.config/composer/vendor/bin/composer-lock-diff --md --from develop"
 
 ## Monolog
 alias tailc="~/Sync/tailc.sh"

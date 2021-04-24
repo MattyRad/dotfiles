@@ -464,9 +464,9 @@ call plug#end()
 
 " On the fence:
 "Plug 'vim-ctrlspace/vim-ctrlspace'                     " handles projects and working directories, looks handy, but has an annoying learning curve
-"Plug 'ctrlpvim/ctrlp.vim' " not as actively maintained as denite? unite/denite touts that it is better
-" https://github.com/liuchengxu/vim-clap " sounds impressive, new and built with rust, but requires patch-8.1.2114 or neovim
-"Plug 'neoclide/coc.nvim', {'branch': 'release'} " this one is really great, but requiring node 10.12 is such a pain, check other plugins first
+"Plug 'ctrlpvim/ctrlp.vim'                              " not as actively maintained as denite? unite/denite touts that it is better
+" https://github.com/liuchengxu/vim-clap                " sounds impressive, new and built with rust, but requires patch-8.1.2114 or neovim
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}        " this one is really great, but requiring node 10.12 is such a pain, check other plugins first
 
 " Graveyard
 " https://github.com/vim-scripts/SearchComplete         " autocomplete words while searching. it's nice but it break /<up>
