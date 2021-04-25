@@ -1,7 +1,7 @@
 
 # Stock
-alias m="micro -clipboard internal"
-alias v="micro -clipboard internal"
+alias m="micro -softwrap true"
+alias v="micro -softwrap true"
 alias s="subl"
 alias sv="sudo vim"
 alias x="exit"
