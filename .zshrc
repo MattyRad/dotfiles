@@ -1,7 +1,12 @@
 
+#if [ -f ~/.zshrc.extended ]; then
+#    source ~/.zshrc.extended
+#else
+#    print ~/.zshrc.extended not found
+#fi
+
 # Stock
-alias m="micro -softwrap true"
-alias v="micro -softwrap true"
+alias v="micro -softwrap true -diffgutter true -mouse false"
 alias s="subl"
 alias sv="sudo vim"
 alias x="exit"
