@@ -66,3 +66,5 @@ alias dkill='docker stop $(docker ps -a -q); docker rm $(docker ps -a -q)'
 #alias q3="ddgr -x --np -n 3"
 #alias qg="ddgr --gb --np \!g"
 #alias t="tmux choose-tree"
+
+nohup git -C ~/dotfiles pull > /dev/null 2>&1
