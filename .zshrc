@@ -6,7 +6,7 @@
 #fi
 
 # Stock
-alias v="micro -softwrap true -diffgutter true -mouse false -rmtrailingws true"
+alias v="micro -softwrap true -diffgutter true -rmtrailingws true"
 alias s="subl"
 alias sv="sudo vim"
 alias x="exit"
@@ -67,4 +67,4 @@ alias dkill='docker stop $(docker ps -a -q); docker rm $(docker ps -a -q)'
 #alias qg="ddgr --gb --np \!g"
 #alias t="tmux choose-tree"
 
-nohup git -C ~/dotfiles pull > /dev/null 2>&1
+(git -C ~/dotfiles pull &> /dev/null &) > /dev/null 2>&1
