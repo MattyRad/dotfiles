@@ -1,6 +1,7 @@
 {
     "Ctrl-Shift-z": "Redo",
     "Ctrl-w": "Quit",
+    "Ctrl-d": "SpawnMultiCursor",
     "CtrlShiftDown": "MoveLinesDown",
     "CtrlShiftUp": "MoveLinesUp",
     "Alt-/": "lua:comment.comment",
