@@ -1,3 +1,6 @@
 {
-    "Ctrl-w": "Quit"
+    "Ctrl-w": "Quit",
+    "Ctrl-Shift-z": "Redo",
+    "CtrlShiftUp": "MoveLinesUp",
+    "CtrlShiftDown": "MoveLinesDown"
 }
