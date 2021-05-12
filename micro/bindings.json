@@ -1,6 +1,8 @@
 {
-    "Ctrl-w": "Quit",
     "Ctrl-Shift-z": "Redo",
+    "Ctrl-w": "Quit",
+    "CtrlShiftDown": "MoveLinesDown",
     "CtrlShiftUp": "MoveLinesUp",
-    "CtrlShiftDown": "MoveLinesDown"
+    "Alt-/": "lua:comment.comment",
+    "CtrlUnderscore": "lua:comment.comment"
 }
