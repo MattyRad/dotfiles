@@ -53,7 +53,7 @@ alias gc="git commit"
 alias undolastcommit="git reset --soft HEAD~1"
 alias stashview="git stash show -p"
 alias stashdelete="git stash drop stash@{0}"
-alias gsreset="git reset --hard --recurse-submodule"
+alias gsreset="git submodule update --init --recursive"
 
 # Docker
 alias dquick="docker run --rm -it"
