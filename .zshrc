@@ -6,7 +6,7 @@
 #fi
 
 # Stock
-alias v="micro -softwrap true -diffgutter true -rmtrailingws true -tabstospaces true -tabmovement true -savecursor true"
+alias v="micro -softwrap true -diffgutter true -rmtrailingws true -tabstospaces true -tabmovement true -savecursor true -scrollbar true"
 alias s="subl"
 alias sv="sudo vim"
 alias x="exit"
@@ -68,5 +68,10 @@ alias dkill='docker stop $(docker ps -a -q); docker rm $(docker ps -a -q)'
 #alias t="tmux choose-tree"
 
 stty eof ^W
+
+# start tmux if it's available and not currently running
+if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+  exec tmux
+fi
 
 (git -C ~/dotfiles pull &> /dev/null &) > /dev/null 2>&1
