@@ -53,6 +53,7 @@ alias gc="git commit"
 alias undolastcommit="git reset --soft HEAD~1"
 alias stashview="git stash show -p"
 alias stashdelete="git stash drop stash@{0}"
+alias gsreset="git reset --hard --recurse-submodule"
 
 # Docker
 alias dquick="docker run --rm -it"
@@ -67,6 +68,7 @@ alias dkill='docker stop $(docker ps -a -q); docker rm $(docker ps -a -q)'
 #alias qg="ddgr --gb --np \!g"
 #alias t="tmux choose-tree"
 
+# Remap ^D (ctrl-D, the EOT/EOF transmission) to ^W (ctrl-W)
 stty eof ^W
 
 # start tmux if it's available and not currently running
