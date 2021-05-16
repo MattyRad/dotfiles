@@ -4,6 +4,7 @@
     "Ctrl-d": "SpawnMultiCursor",
     "CtrlShiftDown": "MoveLinesDown",
     "CtrlShiftUp": "MoveLinesUp",
+    "Ctrl-p": "command:fzf",
     "Alt-/": "lua:comment.comment",
     "CtrlUnderscore": "lua:comment.comment"
 }
