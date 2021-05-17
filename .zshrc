@@ -72,8 +72,9 @@ alias dkill='docker stop $(docker ps -a -q); docker rm $(docker ps -a -q)'
 stty eof ^W
 
 # start byobu if it's available and not currently running
-if command -v byobu &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-  exec byobu
-fi
+# TODO: fix shift keybinding for swtiching panes
+#if command -v byobu &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+#  exec byobu
+#fi
 
 (git -C ~/dotfiles pull &> /dev/null &) > /dev/null 2>&1
