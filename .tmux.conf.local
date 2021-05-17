@@ -410,12 +410,6 @@ bind-key -n S-M-Right select-pane -R
 bind-key -n S-M-Up select-pane -U
 bind-key -n S-M-Down select-pane -D
 bind-key -n M-z choose-tree
-bind-key -n M-- split-window -v
-bind-key -n S-M-Left select-pane -L
-bind-key -n S-M-Right select-pane -R
-bind-key -n S-M-Up select-pane -U
-bind-key -n S-M-Down select-pane -D
-bind-key -n M-z choose-tree
-bind-key -n M-- split-window -v
-bind-key -n M-\ split-window -h
+bind-key -n S-M-- split-window -v
+bind-key -n S-M-\ split-window -h
 set-window-option -g xterm-keys on
