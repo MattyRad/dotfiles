@@ -6,7 +6,7 @@
 #fi
 
 # Stock
-alias v="micro -softwrap true -diffgutter true -rmtrailingws true -tabstospaces true -tabmovement true -savecursor true -scrollbar true"
+alias v="micro -softwrap true -diffgutter true -rmtrailingws true -tabstospaces true -tabmovement true -savecursor true -scrollbar true -xterm true"
 alias s="subl"
 alias sv="sudo vim"
 alias x="exit"
