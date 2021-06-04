@@ -35,6 +35,12 @@ alias install="sudo apt-get install -y"
 # PHP / Composer
 alias ci="composer install -vvv"
 alias cu="composer update -vvv"
+alias ci72="php7.2 /usr/local/bin/composer install -vvv"
+alias ci74="php7.4 /usr/local/bin/composer install -vvv"
+alias ci80="php8.0 /usr/local/bin/composer install -vvv"
+alias cu72="php7.2 /usr/local/bin/composer update -vvv"
+alias cu74="php7.4 /usr/local/bin/composer update -vvv"
+alias cu80="php8.0 /usr/local/bin/composer update -vvv"
 alias pa="php artisan"
 alias stan="./vendor/bin/phpstan analyse"
 alias unit="./vendor/bin/phpunit"
@@ -56,7 +62,7 @@ alias stashdelete="git stash drop stash@{0}"
 alias gsreset="git submodule update --init --recursive"
 
 # Docker
-alias dquick="docker run --rm -it"
+alias dquick='docker run --rm -it -v "$PWD":/dockervolume -w /dockervolume'
 alias dexec="docker exec -it"
 alias dstop='docker stop $(docker ps -a -q);'
 alias dkill='docker stop $(docker ps -a -q); docker rm $(docker ps -a -q)'
@@ -71,10 +77,10 @@ alias dkill='docker stop $(docker ps -a -q); docker rm $(docker ps -a -q)'
 # Remap ^D (ctrl-D, the EOT/EOF transmission) to ^W (ctrl-W)
 stty eof ^W
 
-# start byobu if it's available and not currently running
-# TODO: fix shift keybinding for swtiching panes
-#if command -v byobu &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-#  exec byobu
+# start zellij if it's available and not currently running
+#if command -v zellij &> /dev/null && [ -n "$PS1" ] && [ -z "$ZELLIJ" ]; then
+#  randomstr=`tr -dc A-Za-z </dev/urandom | head -c 4`
+#  exec zellij --session "$randomstr"
 #fi
 
 (git -C ~/dotfiles pull &> /dev/null &) > /dev/null 2>&1
