@@ -21,7 +21,7 @@ alias f="find ./ -name"
 alias sshc="ssh -Y"
 
 # Rust tools
-alias r="rg --no-ignore"
+alias r="rg --no-ignore --hidden"
 alias search="fd --no-ignore --hidden"
 alias sizeof="~/Sync/bin/dust"
 alias fz="~/Sync/bin/sk"
