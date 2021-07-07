@@ -55,7 +55,8 @@ alias tailcm="~/Sync/bin/tailc-min.sh"
 alias gs="git status"
 alias gd="git diff"
 alias gds="git diff --staged"
-alias gc="git commit"
+alias gcu="git commit"
+alias gc="git commit -S"
 alias undolastcommit="git reset --soft HEAD~1"
 alias stashview="git stash show -p"
 alias stashdelete="git stash drop stash@{0}"
@@ -66,6 +67,7 @@ alias dquick='docker run --rm -it -v "$PWD":/dockervolume -w /dockervolume'
 alias dexec="docker exec -it"
 alias dstop='docker stop $(docker ps -a -q);'
 alias dkill='docker stop $(docker ps -a -q); docker rm $(docker ps -a -q)'
+alias dbuild='docker build -t'
 
 # Graveyard
 #alias q="ddgr -x --np"
