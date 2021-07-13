@@ -35,6 +35,9 @@ alias install="sudo apt-get install -y"
 # PHP / Composer
 alias ci="composer install -vvv"
 alias cu="composer update -vvv"
+alias c72="php7.2 /usr/local/bin/composer"
+alias c74="php7.4 /usr/local/bin/composer"
+alias c80="php8.0 /usr/local/bin/composer"
 alias ci72="php7.2 /usr/local/bin/composer install -vvv"
 alias ci74="php7.4 /usr/local/bin/composer install -vvv"
 alias ci80="php8.0 /usr/local/bin/composer install -vvv"
@@ -47,9 +50,8 @@ alias unit="./vendor/bin/phpunit"
 alias difflock="~/.config/composer/vendor/bin/composer-lock-diff --md --from develop"
 
 ## Monolog
-alias tailc="~/Sync/tailc.sh"
-alias tailc="~/Sync/bin/tailc.sh"
-alias tailcm="~/Sync/bin/tailc-min.sh"
+alias tailc="~/dotfiles/tailc.sh"
+alias tailcm="~/dotfiles/bin/tailc-min.sh"
 
 # Git
 alias gs="git status"
