@@ -268,6 +268,10 @@ alias dbuild='docker build -t'
 #alias qg="ddgr --gb --np \!g"
 #alias t="tmux choose-tree"
 
+# Search based on prefix of command, not entire commands
+bind \e\[A history-prefix-search-backward
+bind \e\[B history-prefix-search-forward
+
 # Remap ^D (ctrl-D, the EOT/EOF transmission) to ^W (ctrl-W)
 #stty eof ^W
 bind \cw 'exit'
@@ -278,4 +282,5 @@ bind \cw 'exit'
 #  exec zellij --session "$randomstr" options --simplified-ui --default-mode=locked --no-pane-frames
 #fi
 
+# Sync dotfiles
 git -C ~/dotfiles pull &> /dev/null &

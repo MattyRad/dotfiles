@@ -72,9 +72,9 @@ function show_git_info -d "Show git repository information"
     end
 
     # If there is stashed modifications on repository, add '^' to dirty
-    if ! [ -z (git stash list) ]
-        set dirty "$dirty^"
-    end
+    #if ! [ -z (git stash list) ]
+    #    set dirty "$dirty^"
+    #end
 
     # Prints git repository status
     echo -en "$git_branch_name $dirty"
