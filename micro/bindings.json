@@ -5,8 +5,8 @@
     "CtrlShiftDown": "MoveLinesDown",
     "CtrlShiftUp": "MoveLinesUp",
     "Ctrl-p": "command:fzf",
-    "Alt-left": "PreviousTab",
-    "Alt-right": "NextTab",
+    "AltLeft": "PreviousTab",
+    "AltRight": "NextTab",
     "Alt-/": "lua:comment.comment",
     "CtrlUnderscore": "lua:comment.comment"
 }
