@@ -282,5 +282,8 @@ bind \cw 'exit'
 #  exec zellij --session "$randomstr" options --simplified-ui --default-mode=locked --no-pane-frames
 #fi
 
+# Set pager to clear the screen when done
+export LESS="-R $LESS"
+
 # Sync dotfiles
 git -C ~/dotfiles pull &> /dev/null &

@@ -81,3 +81,4 @@ function show_git_info -d "Show git repository information"
 
     set_color normal
 end
+
