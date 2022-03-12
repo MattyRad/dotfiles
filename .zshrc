@@ -6,7 +6,7 @@
 #fi
 
 # Stock
-alias v="micro -softwrap true -diffgutter true -rmtrailingws true -tabstospaces true -tabmovement true -savecursor true -scrollbar true -xterm true"
+alias v="micro -softwrap true -diffgutter true -rmtrailingws true -tabstospaces true -tabmovement true -savecursor true -scrollbar true -xterm true -ruler false"
 alias s="subl"
 alias sv="sudo vim"
 alias x="exit"
@@ -78,6 +78,8 @@ alias dbuild='docker build -t'
 #alias qg="ddgr --gb --np \!g"
 #alias t="tmux choose-tree"
 
+alias j="cd && zi"
+
 # Remap ^D (ctrl-D, the EOT/EOF transmission) to ^W (ctrl-W)
 stty eof ^W
 
@@ -86,5 +88,9 @@ stty eof ^W
 #  randomstr=`tr -dc A-Za-z </dev/urandom | head -c 4`
 #  exec zellij --session "$randomstr"
 #fi
+
+if command -v zoxide &> /dev/null && [ -n "$PS1" ]; then
+  eval "$(zoxide init zsh)"
+fi
 
 (git -C ~/dotfiles pull &> /dev/null &) > /dev/null 2>&1
