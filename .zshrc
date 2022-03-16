@@ -93,4 +93,12 @@ if command -v zoxide &> /dev/null && [ -n "$PS1" ]; then
   eval "$(zoxide init zsh)"
 fi
 
+if command -v exa &> /dev/null && [ -n "$PS1" ]; then
+  alias ls="exa"
+fi
+
+if command -v bat &> /dev/null && [ -n "$PS1" ]; then
+  alias cat="bat"
+fi
+
 (git -C ~/dotfiles pull &> /dev/null &) > /dev/null 2>&1
