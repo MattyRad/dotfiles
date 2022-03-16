@@ -91,6 +91,7 @@ stty eof ^W
 
 if command -v zoxide &> /dev/null && [ -n "$PS1" ]; then
   eval "$(zoxide init zsh)"
+  alias cd="echo 'zoxide is installed, use z command instead'"
 fi
 
 if command -v exa &> /dev/null && [ -n "$PS1" ]; then
