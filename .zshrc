@@ -56,6 +56,8 @@ alias tailcm="~/dotfiles/bin/tailc-min.sh"
 # Git
 alias gs="git status"
 alias gd="git diff"
+#alias d="git -c core.pager='delta --syntax-theme=\"Monokai Extended\" --pager=\"less -R\"' -c interactive.diffFilter='delta --syntax-theme=\"Monokai Extended\" --color-only' -c delta.navigate=true -c merge.conflictstyle=diff3 -c diff.colorMoved=default diff"
+alias d="git -c core.pager='delta --pager=\"less -R\"' -c interactive.diffFilter='delta --color-only' -c delta.navigate=true -c merge.conflictstyle=diff3 -c diff.colorMoved=default diff"
 alias gds="git diff --staged"
 alias gcu="git commit"
 alias gc="git commit -S"
@@ -65,7 +67,7 @@ alias stashdelete="git stash drop stash@{0}"
 alias gsreset="git submodule update --init --recursive"
 
 # Docker
-alias dquick='docker run --rm -it -v "$PWD":/dockervolume -w /dockervolume'
+alias dquick='docker run --rm -it --init -v "$PWD":/dockervolume -w /dockervolume'
 alias dexec="docker exec -it"
 alias dstop='docker stop $(docker ps -a -q);'
 alias dkill='docker stop $(docker ps -a -q); docker rm $(docker ps -a -q)'

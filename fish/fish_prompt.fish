@@ -12,7 +12,13 @@ function show_path -d "Prints current directory abbreviated"
     echo -en "["
 
     set_color yellow
-    echo -en (prompt_pwd)
+    #echo -en (prompt_pwd)
+
+    #if [ (echo "$HOME") == (basename (pwd)) ]
+    #    echo -en "~"
+    #else
+        echo -en (basename (pwd))
+    #end
 
     set_color blue
     echo -en "] "
