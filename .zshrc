@@ -19,13 +19,14 @@ alias f="find ./ -name"
 
 # SSH
 alias sshc="ssh -Y"
+alias sendkey="ssh-copy-id -i"
 
 # Rust tools
 alias r="rg --no-ignore --hidden"
 alias search="fd --no-ignore --hidden"
-alias sizeof="~/Sync/bin/dust"
-alias fz="~/Sync/bin/sk"
-alias markdown="~/Sync/bin/mdcat"
+#alias sizeof="~/Sync/bin/dust"
+#alias fz="~/Sync/bin/sk"
+#alias markdown="~/Sync/bin/mdcat"
 
 # Apt
 alias update="sudo apt-get update"
@@ -61,6 +62,7 @@ alias d="git -c core.pager='delta --pager=\"less -R\"' -c interactive.diffFilter
 alias gds="git diff --staged"
 alias gcu="git commit"
 alias gc="git commit -S"
+alias gi="git init"
 alias undolastcommit="git reset --soft HEAD~1"
 alias stashview="git stash show -p"
 alias stashdelete="git stash drop stash@{0}"
@@ -80,7 +82,7 @@ alias dbuild='docker build -t'
 #alias qg="ddgr --gb --np \!g"
 #alias t="tmux choose-tree"
 
-alias j="cd && zi"
+alias j="z && zi"
 
 # Remap ^D (ctrl-D, the EOT/EOF transmission) to ^W (ctrl-W)
 stty eof ^W
