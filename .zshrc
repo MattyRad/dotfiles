@@ -1,3 +1,4 @@
+DISABLE_UPDATE_PROMPT="true"
 
 #if [ -f ~/.zshrc.extended ]; then
 #    source ~/.zshrc.extended
