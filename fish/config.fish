@@ -287,3 +287,5 @@ export LESS="-R $LESS"
 
 # Sync dotfiles
 git -C ~/dotfiles pull &> /dev/null &
+
+set -U FZF_COMPLETE 2
