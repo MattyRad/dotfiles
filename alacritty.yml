@@ -849,6 +849,7 @@ key_bindings:
   #- { key: Minus,          mods: Control,                         action: DecreaseFontSize }
   #- { key: NumpadSubtract, mods: Control,                         action: DecreaseFontSize }
   - { key: Minus,    mods: Control,                 action: None }
+  - { key: Down,     mods: Control,                 chars: "cd ..\n"}
 
   # (Windows only)
   #- { key: Return,   mods: Alt,           action: ToggleFullscreen }

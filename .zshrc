@@ -100,10 +100,18 @@ fi
 
 if command -v exa &> /dev/null && [ -n "$PS1" ]; then
   alias ls="exa"
+  # preview cd
+  zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
+  # preview z
+  zstyle ':fzf-tab:complete:z:*' fzf-preview 'exa -1 --color=always $realpath'
 fi
 
 if command -v bat &> /dev/null && [ -n "$PS1" ]; then
   alias cat="bat"
 fi
+
+# make it so fzf-tab detects hidden files
+setopt globdots
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 (git -C ~/dotfiles pull &> /dev/null &) > /dev/null 2>&1
