@@ -850,6 +850,8 @@ key_bindings:
   #- { key: NumpadSubtract, mods: Control,                         action: DecreaseFontSize }
   - { key: Minus,    mods: Control,                 action: None }
   - { key: Down,     mods: Control,                 chars: "cd ..\n"}
+  - { key: PageUp,   mods: Control,                 chars: "git push\n"}
+  - { key: PageDown, mods: Control,                 chars: "git pull\n"}
 
   # (Windows only)
   #- { key: Return,   mods: Alt,           action: ToggleFullscreen }
