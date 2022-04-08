@@ -83,8 +83,6 @@ alias dbuild='docker build -t'
 #alias qg="ddgr --gb --np \!g"
 #alias t="tmux choose-tree"
 
-alias j="z && zi"
-
 # Remap ^D (ctrl-D, the EOT/EOF transmission) to ^W (ctrl-W)
 stty eof ^W
 

@@ -201,8 +201,9 @@ alias gams='git am --skip'
 alias gama='git am --abort'
 alias gamscp='git am --show-current-patch'
 
+
 # Stock
-alias v="micro -softwrap true -diffgutter true -rmtrailingws true -tabstospaces true -tabmovement true -savecursor true -scrollbar true -xterm true -basename true"
+alias v="micro -softwrap true -diffgutter true -rmtrailingws true -tabstospaces true -tabmovement true -savecursor true -scrollbar true -xterm true -ruler false"
 alias s="subl"
 alias sv="sudo vim"
 alias x="exit"
@@ -215,13 +216,14 @@ alias f="find ./ -name"
 
 # SSH
 alias sshc="ssh -Y"
+alias sendkey="ssh-copy-id -i"
 
 # Rust tools
 alias r="rg --no-ignore --hidden"
 alias search="fd --no-ignore --hidden"
-alias sizeof="~/Sync/bin/dust"
-alias fz="~/Sync/bin/sk"
-alias markdown="~/Sync/bin/mdcat"
+#alias sizeof="~/Sync/bin/dust"
+#alias fz="~/Sync/bin/sk"
+#alias markdown="~/Sync/bin/mdcat"
 
 # Apt
 alias update="sudo apt-get update"
@@ -234,6 +236,12 @@ alias cu="composer update -vvv"
 alias c72="php7.2 /usr/local/bin/composer"
 alias c74="php7.4 /usr/local/bin/composer"
 alias c80="php8.0 /usr/local/bin/composer"
+alias ci72="php7.2 /usr/local/bin/composer install -vvv"
+alias ci74="php7.4 /usr/local/bin/composer install -vvv"
+alias ci80="php8.0 /usr/local/bin/composer install -vvv"
+alias cu72="php7.2 /usr/local/bin/composer update -vvv"
+alias cu74="php7.4 /usr/local/bin/composer update -vvv"
+alias cu80="php8.0 /usr/local/bin/composer update -vvv"
 alias pa="php artisan"
 alias stan="./vendor/bin/phpstan analyse"
 alias unit="./vendor/bin/phpunit"
@@ -246,19 +254,22 @@ alias tailcm="~/dotfiles/bin/tailc-min.sh"
 # Git
 alias gs="git status"
 alias gd="git diff"
+#alias d="git -c core.pager='delta --syntax-theme=\"Monokai Extended\" --pager=\"less -R\"' -c interactive.diffFilter='delta --syntax-theme=\"Monokai Extended\" --color-only' -c delta.navigate=true -c merge.conflictstyle=diff3 -c diff.colorMoved=default diff"
+alias d="git -c core.pager='delta --pager=\"less -R\"' -c interactive.diffFilter='delta --color-only' -c delta.navigate=true -c merge.conflictstyle=diff3 -c diff.colorMoved=default diff"
 alias gds="git diff --staged"
 alias gcu="git commit"
 alias gc="git commit -S"
+alias gi="git init"
 alias undolastcommit="git reset --soft HEAD~1"
 alias stashview="git stash show -p"
 alias stashdelete="git stash drop stash@{0}"
 alias gsreset="git submodule update --init --recursive"
 
 # Docker
-alias dquick='docker run --rm -it -v `pwd`:/dockervolume -w /dockervolume'
+alias dquick='docker run --rm -it --init -v "$PWD":/dockervolume -w /dockervolume'
 alias dexec="docker exec -it"
-alias dstop='docker stop `docker ps -a -q`'
-alias dkill='docker stop `docker ps -a -q`; docker rm `docker ps -a -q`'
+alias dstop='docker stop $(docker ps -a -q);'
+alias dkill='docker stop $(docker ps -a -q); docker rm $(docker ps -a -q)'
 alias dbuild='docker build -t'
 
 # Graveyard
@@ -275,12 +286,6 @@ bind \e\[B history-prefix-search-forward
 # Remap ^D (ctrl-D, the EOT/EOF transmission) to ^W (ctrl-W)
 #stty eof ^W
 bind \cw 'exit'
-
-# start zellij if it's available and not currently running
-#if command -v zellij &> /dev/null && [ -n "$PS1" ] && [ -z "$ZELLIJ" ]; then
-#  randomstr=`tr -dc A-Za-z </dev/urandom | head -c 4`
-#  exec zellij --session "$randomstr" options --simplified-ui --default-mode=locked --no-pane-frames
-#fi
 
 # Set pager to clear the screen when done
 export LESS="-R $LESS"
