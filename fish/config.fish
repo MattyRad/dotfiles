@@ -297,3 +297,9 @@ set -U FZF_COMPLETE 2
 
 # https://github.com/fish-shell/fish-shell/issues/2904
 bind \cc 'echo; commandline | cat; commandline ""; commandline -f repaint'
+
+set fish_greeting
+
+if type -q zoxide
+  zoxide init fish | source
+end
