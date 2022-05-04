@@ -40,12 +40,15 @@ alias cu="composer update -vvv"
 alias c72="php7.2 /usr/local/bin/composer"
 alias c74="php7.4 /usr/local/bin/composer"
 alias c80="php8.0 /usr/local/bin/composer"
+alias c81="php8.1 /usr/local/bin/composer"
 alias ci72="php7.2 /usr/local/bin/composer install -vvv"
 alias ci74="php7.4 /usr/local/bin/composer install -vvv"
 alias ci80="php8.0 /usr/local/bin/composer install -vvv"
+alias ci81="php8.1 /usr/local/bin/composer install -vvv"
 alias cu72="php7.2 /usr/local/bin/composer update -vvv"
 alias cu74="php7.4 /usr/local/bin/composer update -vvv"
 alias cu80="php8.0 /usr/local/bin/composer update -vvv"
+alias cu81="php8.1 /usr/local/bin/composer update -vvv"
 alias pa="php artisan"
 alias stan="./vendor/bin/phpstan analyse"
 alias unit="./vendor/bin/phpunit"
@@ -105,7 +108,7 @@ if command -v exa &> /dev/null && [ -n "$PS1" ]; then
 fi
 
 if command -v bat &> /dev/null && [ -n "$PS1" ]; then
-  alias cat="bat"
+  alias cat="bat --plain"
 fi
 
 # make it so fzf-tab detects hidden files
