@@ -1,0 +1,158 @@
+colors:
+  # Theme colors
+  background_color: '1a1a1a'
+  purple: "ae81ff"
+  khaki: "e6db74"
+  pink: "f92672"
+  cyan: "66d9ef"
+  green: "a6e22e"
+  orange: "fd971f"
+
+  # Others
+  white: "ffffff"
+  black: "000000"
+  red: "ff4a44"
+  gray: "b6b6b6"
+  dimgray: "7a7070"
+  gold: "e2d139"
+  springgreen: "00ff87"
+  darkgray: "333333"
+  # Based on the Nord colorscheme.
+  # (https://www.nordtheme.com/docs/colors-and-palettes)
+
+  # Polar night
+  polar-night-nord0: '2e3440'
+  polar-night-nord1: '3b4252'
+  polar-night-nord2: '434c5e'
+  polar-night-nord3: '4c566a'
+
+  # Snow storm
+  snow-storm-nord4: 'd8dee9'
+  snow-storm-nord5: 'e5e9f0'
+  snow-storm-nord6: 'eceff4'
+
+  # Frost
+  frost-nord7: '8fbcbb'
+  frost-nord8: '88c0d0'
+  frost-nord9: '81a1c1'
+  frost-nord10: '5e81ac'
+
+  # Aurora
+  aurora-nord11: 'bf616a'
+  aurora-nord12: 'd08770'
+  aurora-nord13: 'ebcb8b'
+  aurora-nord14: 'a3be8c'
+  aurora-nord15: 'b48ead'
+core:
+  normal_text: {}
+  regular_file: {}
+  reset_to_normal: {}
+
+  directory:
+    foreground: frost-nord9
+    font-style: bold
+
+  symlink:
+    foreground: cyan
+
+  multi_hard_link: {}
+
+  fifo:
+    foreground: black
+    background: cyan
+
+  socket:
+    foreground: black
+    background: pink
+
+  door:
+    foreground: black
+    background: pink
+
+  block_device:
+    foreground: cyan
+    background: darkgray
+
+  character_device:
+    foreground: pink
+    background: darkgray
+
+  broken_symlink:
+    foreground: black
+    background: red
+
+  missing_symlink_target:
+    foreground: black
+    background: red
+
+  setuid: {}
+
+  setgid: {}
+
+  file_with_capability: {}
+
+  sticky_other_writable: {}
+
+  other_writable: {}
+
+  sticky: {}
+
+  executable_file:
+    foreground: green
+    font-style: bold
+
+text:
+  special:
+    foreground: black
+    background: khaki
+
+  todo:
+    font-style: bold
+
+  licenses:
+    foreground: gray
+
+  configuration:
+    foreground: aurora-nord14
+
+  other:
+    foreground: gold
+
+markup:
+  web:
+    foreground: gold
+  doc:
+    foreground: pink
+  other:
+    foreground: gray
+
+programming:
+  source:
+    foreground: springgreen
+    php:
+      foreground: purple
+    javascript:
+      foreground: gray
+
+  tooling:
+    foreground: green
+
+    continuous-integration:
+      foreground: khaki
+
+media:
+  foreground: orange
+
+office:
+  foreground: khaki
+
+archives:
+  foreground: khaki
+  font-style: underline
+
+executable:
+  foreground: pink
+  font-style: bold
+
+unimportant:
+  foreground: dimgray
