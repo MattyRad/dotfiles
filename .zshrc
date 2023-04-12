@@ -86,6 +86,56 @@ alias dbuild='docker build -t'
 #alias qg="ddgr --gb --np \!g"
 #alias t="tmux choose-tree"
 
+mkdir -p ~/.marks/
+export CDPATH=.:~/.marks/
+function mark { ln -sr "$(pwd)" ~/.marks/"$1"; }
+
+if [ -f ~/.openai ]; then
+    export OPENAI_API_KEY=$(cat ~/.openai)
+else
+    print Openai key not found
+fi
+
+function p {
+    GPT_RESPONSE=$(curl https://api.openai.com/v1/chat/completions -s \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer $OPENAI_API_KEY" \
+    -d '{
+        "model": "gpt-3.5-turbo",
+        "messages": [{"role": "user", "content": "'$1'"}],
+        "temperature": 0.7
+    }')
+    echo -E $GPT_RESPONSE | jq -r '.choices[0].message.content'
+}
+
+function pr {
+    GPT_RESPONSE=$(curl https://api.openai.com/v1/chat/completions -s \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer $OPENAI_API_KEY" \
+    -d '{
+        "model": "gpt-3.5-turbo",
+        "messages": [{"role": "user", "content": "'$1'"}],
+        "temperature": 0.7
+    }')
+    echo -E $GPT_RESPONSE
+}
+
+function prq {
+    echo '{
+        "model": "gpt-3.5-turbo",
+        "messages": [{"role": "user", "content": "'$1'"}],
+        "temperature": 0.7
+    }'
+}
+
+alias aigle="chatblade --only --no-format --prompt-file aigle"
+alias q="chatblade --only --no-format"
+alias qq="chatblade --only"
+
+function aigle {
+     $@
+}
+
 # Remap ^D (ctrl-D, the EOT/EOF transmission) to ^W (ctrl-W)
 stty eof ^W
 
@@ -110,12 +160,16 @@ if command -v exa &> /dev/null && [ -n "$PS1" ]; then
 fi
 
 if command -v bat &> /dev/null && [ -n "$PS1" ]; then
-  alias cat="bat --plain"
+  alias cat="bat --plain --paging=never"
 fi
 
+
 # make it so fzf-tab detects hidden files
-setopt globdots
+#setopt globdots
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
+# make it so . and .. aren't in tab completion
+#setopt no_dotglob
 
 (git -C ~/dotfiles pull &> /dev/null &) > /dev/null 2>&1
 
