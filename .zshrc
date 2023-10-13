@@ -65,7 +65,7 @@ alias gd="git diff"
 alias d="git -c core.pager='delta --pager=\"less -R\"' -c interactive.diffFilter='delta --color-only' -c delta.navigate=true -c merge.conflictstyle=diff3 -c diff.colorMoved=default diff"
 alias gds="git diff --staged"
 alias gcu="git commit"
-alias gc="git commit -S"
+#alias gc="git commit -S" # git config --global commit.gpgsign true
 alias gi="git init"
 alias undolastcommit="git reset --soft HEAD~1"
 alias stashview="git stash show -p"
