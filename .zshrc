@@ -52,7 +52,7 @@ alias cu81="php8.1 /usr/local/bin/composer update -vvv"
 alias pa="php artisan"
 alias stan="./vendor/bin/phpstan analyse"
 alias unit="./vendor/bin/phpunit"
-alias difflock="~/.config/composer/vendor/bin/composer-lock-diff --md --from develop"
+alias difflock="~/.config/composer/vendor/bin/composer-lock-diff --md --from master"
 
 ## Monolog
 alias tailc="~/dotfiles/tailc.sh"
@@ -85,6 +85,8 @@ alias dbuild='docker build -t'
 #alias q3="ddgr -x --np -n 3"
 #alias qg="ddgr --gb --np \!g"
 #alias t="tmux choose-tree"
+
+alias ports="sudo netstat -tunlp"
 
 mkdir -p ~/.marks/
 export CDPATH=.:~/.marks/
