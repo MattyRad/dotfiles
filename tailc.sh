@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 tail ${@:1} | sed --unbuffered \
+    -e 's/\(.*DEBUG.*\)/\o033[37m\1\o033[39m/' \
     -e 's/\(.*INFO.*\)/\o033[90m\1\o033[39m/' \
     -e 's/\(.*NOTICE.*\)/\o033[37m\1\o033[39m/' \
     -e 's/\(.*WARNING.*\)/\o033[33m\1\o033[39m/' \

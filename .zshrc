@@ -9,9 +9,7 @@ DISABLE_UPDATE_PROMPT="true"
 # Stock
 alias v="micro -softwrap true -diffgutter true -rmtrailingws true -tabstospaces true -tabmovement true -savecursor true -scrollbar true -xterm true -ruler false"
 alias s="subl"
-alias sv="sudo vim"
 alias x="exit"
-alias ra="sudo service apache2 restart"
 alias targz="tar xvzf"
 alias mv="mv -iv"
 alias cp="cp -iv"
@@ -25,9 +23,6 @@ alias sendkey="ssh-copy-id -i"
 # Rust tools
 alias r="rg --no-ignore --hidden"
 alias search="fd --no-ignore --hidden"
-#alias sizeof="~/Sync/bin/dust"
-#alias fz="~/Sync/bin/sk"
-#alias markdown="~/Sync/bin/mdcat"
 
 # Apt
 alias update="sudo apt-get update"
@@ -37,21 +32,7 @@ alias install="sudo apt-get install -y"
 # PHP / Composer
 alias ci="composer install -vvv"
 alias cu="composer update -vvv"
-alias c72="php7.2 /usr/local/bin/composer"
-alias c74="php7.4 /usr/local/bin/composer"
-alias c80="php8.0 /usr/local/bin/composer"
-alias c81="php8.1 /usr/local/bin/composer"
-alias ci72="php7.2 /usr/local/bin/composer install -vvv"
-alias ci74="php7.4 /usr/local/bin/composer install -vvv"
-alias ci80="php8.0 /usr/local/bin/composer install -vvv"
-alias ci81="php8.1 /usr/local/bin/composer install -vvv"
-alias cu72="php7.2 /usr/local/bin/composer update -vvv"
-alias cu74="php7.4 /usr/local/bin/composer update -vvv"
-alias cu80="php8.0 /usr/local/bin/composer update -vvv"
-alias cu81="php8.1 /usr/local/bin/composer update -vvv"
 alias pa="php artisan"
-alias stan="./vendor/bin/phpstan analyse"
-alias unit="./vendor/bin/phpunit"
 alias difflock="~/.config/composer/vendor/bin/composer-lock-diff --md --from master"
 
 ## Monolog
@@ -70,21 +51,20 @@ alias gi="git init"
 alias undolastcommit="git reset --soft HEAD~1"
 alias stashview="git stash show -p"
 alias stashdelete="git stash drop stash@{0}"
-alias gsreset="git submodule update --init --recursive"
+alias modupdate="git submodule update --init --recursive"
 
 # Docker
 alias dquick='docker run --rm -it --init -v "$PWD":/dockervolume -w /dockervolume'
-alias dexec="docker exec -it"
-alias dstop='docker stop $(docker ps -a -q);'
-alias dkill='docker stop $(docker ps -a -q); docker rm $(docker ps -a -q)'
-alias dbuild='docker build -t'
+alias dquickme='docker run --rm -it --init -v "$PWD":/dockervolume -w /dockervolume -u $(id -u):$(id -g)'
+alias dr='docker run --rm -it --init -v "$PWD":/dockervolume -w /dockervolume'
 
-# Graveyard
-#alias q="ddgr -x --np"
-#alias q2="ddgr -x --np -n 2"
-#alias q3="ddgr -x --np -n 3"
-#alias qg="ddgr --gb --np \!g"
-#alias t="tmux choose-tree"
+#https://stackoverflow.com/questions/26961371/switch-on-another-branch-create-if-not-exists-without-checking-if-already-exi
+#function bb {
+#    git fetch;
+#    git switch $1 2>/dev/null || git switch --create $1;
+#}
+#alias bb='f() { git fetch && git switch $1 2>/dev/null || git switch --create $1 };f'
+#alias fo="git focus"
 
 alias ports="sudo netstat -tunlp"
 
@@ -92,51 +72,11 @@ mkdir -p ~/.marks/
 export CDPATH=.:~/.marks/
 function mark { ln -sr "$(pwd)" ~/.marks/"$1"; }
 
-if [ -f ~/.openai ]; then
-    export OPENAI_API_KEY=$(cat ~/.openai)
-else
-    print Openai key not found
-fi
-
-function p {
-    GPT_RESPONSE=$(curl https://api.openai.com/v1/chat/completions -s \
-    -H "Content-Type: application/json" \
-    -H "Authorization: Bearer $OPENAI_API_KEY" \
-    -d '{
-        "model": "gpt-3.5-turbo",
-        "messages": [{"role": "user", "content": "'$1'"}],
-        "temperature": 0.7
-    }')
-    echo -E $GPT_RESPONSE | jq -r '.choices[0].message.content'
-}
-
-function pr {
-    GPT_RESPONSE=$(curl https://api.openai.com/v1/chat/completions -s \
-    -H "Content-Type: application/json" \
-    -H "Authorization: Bearer $OPENAI_API_KEY" \
-    -d '{
-        "model": "gpt-3.5-turbo",
-        "messages": [{"role": "user", "content": "'$1'"}],
-        "temperature": 0.7
-    }')
-    echo -E $GPT_RESPONSE
-}
-
-function prq {
-    echo '{
-        "model": "gpt-3.5-turbo",
-        "messages": [{"role": "user", "content": "'$1'"}],
-        "temperature": 0.7
-    }'
-}
-
-alias aigle="chatblade --only --no-format --prompt-file aigle"
-alias q="chatblade --only --no-format"
-alias qq="chatblade --only"
-
-function aigle {
-     $@
-}
+#if [ -f ~/.openai ]; then
+#    export OPENAI_API_KEY=$(cat ~/.openai)
+#else
+#    print Openai key not found
+#fi
 
 # Remap ^D (ctrl-D, the EOT/EOF transmission) to ^W (ctrl-W)
 stty eof ^W
