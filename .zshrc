@@ -15,6 +15,13 @@ alias mv="mv -iv"
 alias cp="cp -iv"
 alias mkdir="mkdir -vp"
 alias f="find ./ -name"
+function mkf {
+    mkdir -vp $1 && cd $1
+}
+
+function replacestr {
+    rg -l $1 | xargs -I "{}" sed -i "s/$1/$2/" "{}"
+}
 
 # SSH
 alias sshc="ssh -Y"
@@ -57,6 +64,10 @@ alias modupdate="git submodule update --init --recursive"
 alias dquick='docker run --rm -it --init -v "$PWD":/dockervolume -w /dockervolume'
 alias dquickme='docker run --rm -it --init -v "$PWD":/dockervolume -w /dockervolume -u $(id -u):$(id -g)'
 alias dr='docker run --rm -it --init -v "$PWD":/dockervolume -w /dockervolume'
+alias n='docker run --net=host --rm -it --init -v "$PWD":/dockervolume -w /dockervolume -u $(id -u):$(id -g) node:18'
+alias dc="docker compose"
+alias dcd="docker compose down"
+alias dcu="docker compose up"
 
 #https://stackoverflow.com/questions/26961371/switch-on-another-branch-create-if-not-exists-without-checking-if-already-exi
 #function bb {
