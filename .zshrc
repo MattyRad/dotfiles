@@ -31,6 +31,9 @@ alias sendkey="ssh-copy-id -i"
 alias r="rg --no-ignore --hidden"
 alias search="fd --no-ignore --hidden"
 
+alias st="spice log short"
+alias stl="spice log long"
+
 # Apt
 alias update="sudo apt-get update"
 alias upgrade="sudo apt-get upgrade"
@@ -68,6 +71,7 @@ alias n='docker run --net=host --rm -it --init -v "$PWD":/dockervolume -w /docke
 alias dc="docker compose"
 alias dcd="docker compose down"
 alias dcu="docker compose up"
+alias b="spice"
 
 #https://stackoverflow.com/questions/26961371/switch-on-another-branch-create-if-not-exists-without-checking-if-already-exi
 #function bb {
