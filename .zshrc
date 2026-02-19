@@ -145,3 +145,10 @@ if command -v bat &> /dev/null && [ -n "$PS1" ]; then
 else
   export FZF_CTRL_T_OPTS="--tac --ansi --border --preview 'bat --color=always {}'"
 fi
+
+# Interactive docker exec
+dbash() {
+  local cid
+  cid=$(docker ps --format "{{.ID}} - {{.Names}}" | fzf | awk '{print $1}')
+  [ -n "$cid" ] && docker exec -it "$cid" /bin/bash
+}

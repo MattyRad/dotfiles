@@ -384,10 +384,10 @@ export OLLAMA_API_BASE=https://ollama.mradford.com
 #  zellij
 #end
 
-if status is-interactive
-    set ZELLIJ_AUTO_EXIT true
-    eval (zellij setup --generate-auto-start fish | string collect)
-end
+#if status is-interactive
+#    set ZELLIJ_AUTO_EXIT true
+#    eval (zellij setup --generate-auto-start fish | string collect)
+#end
 
 fzf_configure_bindings --directory=\cf
 
