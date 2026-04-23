@@ -3,7 +3,7 @@ switch_to_zsh() {
 
     if ! command -v zsh >/dev/null 2>&1; then
         echo "Installing zsh..."
-        sudo apt update && sudo apt install -y zsh
+        sudo apt update && sudo apt install -y zsh git fzf
     else
         echo "zsh is already installed."
     fi
@@ -19,6 +19,12 @@ switch_to_zsh() {
         echo "Changing default shell to zsh..."
         sudo chsh -s "$(command -v zsh)" "$USER"
     fi
+
+    rm -rf ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting && git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+    rm -rf ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions && git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+    rm -rf ~/.oh-my-zsh/custom/plugins/fzf-tab && git clone https://github.com/Aloxaf/fzf-tab ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab
+
+    sed -i 's/plugins=(git)/plugins=(git zsh-syntax-highlighting zsh-autosuggestions fzf)/' ~/.zshrc
 
     echo "--- Done ---"
 }

@@ -15,6 +15,7 @@ alias mv="mv -iv"
 alias cp="cp -iv"
 alias mkdir="mkdir -vp"
 alias f="find ./ -name"
+alias g="spice"
 function mkf {
     mkdir -vp $1 && cd $1
 }
@@ -151,4 +152,10 @@ dbash() {
   local cid
   cid=$(docker ps --format "{{.ID}} - {{.Names}}" | fzf | awk '{print $1}')
   [ -n "$cid" ] && docker exec -it "$cid" /bin/bash
+}
+
+alias rg="rg --fixed-strings"
+
+rgs() {
+  rg -l "$1" | xargs -r subl
 }
