@@ -12,7 +12,10 @@ setup_dotfile() {
         return
     fi
 
-    touch "$system_path"
+    if [ ! -f "$system_path" ]; then
+        echo "Skipping: $system_path does not exist on this system."
+        return
+    fi
 
     local source_line="[ -f $repo_path ] && . $repo_path"
 

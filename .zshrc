@@ -159,3 +159,6 @@ alias rg="rg --fixed-strings"
 rgs() {
   rg -l "$1" | xargs -r subl
 }
+
+[[ -d "$HOME/.local/bin" ]] && path=("$HOME/.local/bin" $path)
+export PATH
