@@ -30,6 +30,7 @@ APPS=(
 "abhinav/git-spice"
 "achannarasappa/ticker"
 "ajeetdsouza/zoxide"
+"AlexsJones/llmfit"
 )
 
 printf "%s\n" "${APPS[@]}" | fzf \
