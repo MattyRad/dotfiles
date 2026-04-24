@@ -26,5 +26,8 @@ switch_to_zsh() {
 
     sed -i 's/plugins=(git)/plugins=(git zsh-syntax-highlighting zsh-autosuggestions fzf)/' ~/.zshrc
 
+    chmod +x ~/dotfiles/source_rc.sh
+    ~/dotfiles/source_rc.sh
+
     echo "--- Done ---"
 }

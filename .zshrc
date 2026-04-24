@@ -162,3 +162,5 @@ rgs() {
 
 [[ -d "$HOME/.local/bin" ]] && path=("$HOME/.local/bin" $path)
 export PATH
+
+alias eget-common="~/dotfiles/eget-common.sh"
