@@ -31,6 +31,7 @@ APPS=(
 "achannarasappa/ticker"
 "ajeetdsouza/zoxide"
 "AlexsJones/llmfit"
+"ollama/ollama"
 )
 
 printf "%s\n" "${APPS[@]}" | fzf \
