@@ -47,8 +47,8 @@ alias pa="php artisan"
 alias difflock="~/.config/composer/vendor/bin/composer-lock-diff --md --from master"
 
 ## Monolog
-alias tailc="~/dotfiles/tailc.sh"
-alias tailcm="~/dotfiles/bin/tailc-min.sh"
+alias tailc="~/.dotfiles/tailc.sh"
+alias tailcm="~/.dotfiles/bin/tailc-min.sh"
 
 # Git
 alias gs="git status"
@@ -101,7 +101,7 @@ stty eof ^W
 #if command -v zellij &> /dev/null && [ -n "$PS1" ] && [ -z "$ZELLIJ" ]; then
 #  randomstr=`tr -dc A-Za-z </dev/urandom | head -c 4`
 #  exec zellij --session "$randomstr"
-#   eval "zellij attach || exec zellij options --simplified-ui=true --mouse-mode=false --no-pane-frames --layout ~/dotfiles/zellij/layout.kdl"
+#   eval "zellij attach || exec zellij options --simplified-ui=true --mouse-mode=false --no-pane-frames --layout ~/.dotfiles/zellij/layout.kdl"
 #   exec zellij options --simplified-ui=true --no-pane-frames
 #fi
 
@@ -129,7 +129,7 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 # make it so . and .. aren't in tab completion
 #setopt no_dotglob
 
-(git -C ~/dotfiles pull &> /dev/null &) > /dev/null 2>&1
+(git -C ~/.dotfiles pull &> /dev/null &) > /dev/null 2>&1
 
 #if command -v vivid &> /dev/null && [ -n "$PS1" ]; then
 #  export LS_COLORS="$(vivid generate ~/.config/vivid/themes/molokai)"
@@ -163,4 +163,4 @@ rgs() {
 [[ -d "$HOME/.local/bin" ]] && path=("$HOME/.local/bin" $path)
 export PATH
 
-alias eget-common="~/dotfiles/eget-common.sh"
+alias eget-common="~/.dotfiles/eget-common.sh"
